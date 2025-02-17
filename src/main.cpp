@@ -62,95 +62,69 @@ int main(int argc, char *argv[])
         res.set_static_file_info("static/" + para);
         res.end(); });
 
-  /* ################### */
+  CROW_ROUTE(app, "/dirls")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
 
-  CROW_ROUTE(app, "/json")
-  ([]
-   {
-    Filesystem fileSystem;
-    //fileSystem.getListDirectory("/tmp");
+          Filesystem fileSystem;
+          crow::json::wvalue j;
+          std::string path = x["target"].s();
+          std::unordered_map<std::string, std::string> uMap;
+          uMap = fileSystem.getListDirectory(path);
+          for (const auto &n : uMap)
+          {
+            j[n.first] = n.second;
+          }
 
-    //crow::json::wvalue x({{"message", "Hello, World!"}});
+          return crow::response{j}; });
 
-     crow::json::wvalue x;
-     std::unordered_map<std::string, std::string> uMap;
-     uMap = fileSystem.getListDirectory("/tmp");
-     for (const auto &n : uMap){
-      x[n.first] = n.second;
-     }
-       //x["message2"] = "Hello, World.. Again!";
-     return x; });
+  CROW_ROUTE(app, "/dirsize")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
 
-  CROW_ROUTE(app, "/jsons")
-  ([](const crow::request &req)
-   {
-    crow::json::wvalue x;
-    if (req.url_params.get("target") != nullptr)
-    {
-      Filesystem fileSystem;
-      std::string path = req.url_params.get("target");
-      std::unordered_map<std::string, std::string> uMap;
-      uMap = fileSystem.getListDirectory(path);
-      for (const auto &n : uMap)
-      {
-        x[n.first] = n.second;
-      }        
-    }
-    else {
-      x["message1"] = "Hello, World!";
-      x["usage"] = "/json?target=/tmp";
-    }
-      return x; });
+          Filesystem fileSystem;
+          crow::json::wvalue j;
+          std::string path = x["target"].s();
+          int size = fileSystem.calculateDirectorySize(path);
+          j["directory size"] = path + ": " + std::to_string(size);
+          
+          return crow::response{j}; });
 
-  CROW_ROUTE(app, "/params")
-  ([](const crow::request &req)
-   {
-        std::ostringstream os;
-        os << "Params: " << req.url_params << "\n\n";
-        os << "The key 'foo' was " << (req.url_params.get("foo") == nullptr ? "not " : "") << "found.\n";
-        os << "foo string: " << req.url_params.get("foo") << "\n\n";
-         if (req.url_params.get("pew") != nullptr)
-        {
-            double countD = crow::utility::lexical_cast<double>(req.url_params.get("pew"));
-            os << "The value of 'pew' is " << countD << '\n';
-        }
-        auto count = req.url_params.get_list("count");
-        os << "The key 'count' contains " << count.size() << " value(s).\n";
-        for (const auto& countVal : count)
-        {
-            os << " - " << countVal << '\n';
-        }
-        return crow::response{os.str()}; });
+  CROW_ROUTE(app, "/crdirs")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
+          std::cout << "target: " << x["target"] << std::endl;
 
-  CROW_ROUTE(app, "/main")
-  ([](const crow::request &, crow::response &res)
-   {
-        //replace cat.jpg with your file path
-        res.set_static_file_info("main.cpp");
-        res.end(); });
+          Filesystem fileSystem;
+          crow::json::wvalue j;
+          std::string path = x["target"].s();
+          if(! fileSystem.createDirectories(path)){
+            j["error"] = "failed creating " + path;
+          }
+          else{
+            j["success"] = "created " + path;
+          }
+
+          return crow::response{j}; });
 
   CROW_ROUTE(app, "/static")
   ([](const crow::request &, crow::response &res)
    {
         //replace cat.jpg with your file path
-        res.set_static_file_info("static/erg.txt");
+        res.set_static_file_info("static/index.html");
         res.end(); });
-
-  CROW_ROUTE(app, "/template")
-  ([]()
-   {
-      //crow::mustache::set_global_base("assets");
-
-      auto page = crow::mustache::load("template.html");
-            
-      crow::mustache::context ctx;
-      ctx["html_title"] = "Template";
-      ctx["webserver_url"] = sptr_ini_config->getWebserverUrl();
-      ctx["webserver_port"] = sptr_ini_config->getWebserverPort();
-      ctx["build_type"] = PROG_BUILD_TYPE;
-
-
-      return page.render(ctx); });
 
   CROW_ROUTE(app, "/about")
   ([]()
@@ -165,6 +139,68 @@ int main(int argc, char *argv[])
             auto page = crow::mustache::load("about.html");
 
             return page.render(ctx); });
+
+  CROW_ROUTE(app, "/uploadfile")
+      .methods(crow::HTTPMethod::Post)([](const crow::request &req)
+                                       {
+          crow::multipart::message file_message(req);
+          crow::json::wvalue j;
+          for (const auto& part : file_message.part_map)
+          {
+              const auto& part_name = part.first;
+              const auto& part_value = part.second;
+              std::cout << "Part: " << part_name;
+              if ("InputFile" == part_name)
+              {
+                  // Extract the file name
+                  auto headers_it = part_value.headers.find("Content-Disposition");
+                  if (headers_it == part_value.headers.end())
+                  {
+                    std::cout << "No Content-Disposition found";
+                    j["error"] = "No Content-Disposition found";
+                    //return crow::response(400);
+                    return crow::response(j);
+                  }
+                  auto params_it = headers_it->second.params.find("filename");
+                  if (params_it == headers_it->second.params.end())
+                  {
+                    std::cout << "Part with name \"InputFile\" should have a file";
+                    j["error"] = "No file found";
+                        return crow::response(j);
+                  }
+                  const std::string outfile_name{params_it->second};
+
+                  for (const auto& part_header : part_value.headers)
+                  {
+                      const auto& part_header_name = part_header.first;
+                      const auto& part_header_val = part_header.second;
+                      std::cout << "Header: " << part_header_name << '=' << part_header_val.value;
+                      for (const auto& param : part_header_val.params)
+                      {
+                          const auto& param_key = param.first;
+                          const auto& param_val = param.second;
+                          std::cout << " Param: " << param_key << ',' << param_val;
+                      }
+                  }
+
+                  // Create a new file with the extracted file name and write file contents to it
+                  std::ofstream out_file(outfile_name);
+                  if (!out_file)
+                  {
+                    std::cout << " Write to file failed\n";
+                    continue;
+                  }
+                  out_file << part_value.body;
+                  out_file.close();
+                  std::cout << " Contents written to " << outfile_name << '\n';
+              }
+              else
+              {
+                std::cout << " Value: " << part_value.body << '\n';
+              }
+          }
+          j["success"] = "file uploaded";
+          return crow::response(j); });
 
   std::string prog_build_type = PROG_BUILD_TYPE;
   if (prog_build_type.compare("Debug") == 0)

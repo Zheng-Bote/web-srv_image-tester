@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.23)
 
 project(
   crow_web
-  VERSION 0.1.0
+  VERSION 0.2.0
   DESCRIPTION "CXX23 webserver to test images"
   HOMEPAGE_URL "https://github.com/Zheng-Bote/web-srv_image-tester"
   LANGUAGES CXX)

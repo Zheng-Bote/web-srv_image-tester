@@ -179,6 +179,12 @@ std::unordered_map<std::string, std::string> Filesystem::getListDirectory(const 
     std::filesystem::path dir = p;
     std::unordered_map<std::string, std::string> uMap;
 
+    if (!Filesystem::isDirectory(p))
+    {
+        uMap["error"] = "Not a directory: " + p.string();
+        return uMap;
+    }
+
     for (const auto &entry : std::filesystem::directory_iterator(p))
     {
         std::filesystem::path path = entry.path();

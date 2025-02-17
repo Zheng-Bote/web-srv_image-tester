@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Checker</title>
+    <meta name="description" content="check the content of a docker image" />
+    <meta name="version" content="v00.01.00" />
+    <meta name="author" content="ZHENG Robert" />
+
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+    <link rel="alternate icon" href="/static/favicon.ico" />
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+
+    <link href="/static/main.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body id="body">
+    <div class="container">
+      <header id="header">
+        <span id="header_left" class="header_left">
+          <h1>Image Checker</h1>
+        </span>
+        <span id="header_right" class="header_right">
+          <img src="/static/favicon.svg" /><br />rrBBP</span
+        >
+      </header>
+
+      <article id="article">
+        <h1>content</h1>
+
+        <section id="section">
+          <h2>output</h2>
+          <span class="brief">command output</span>
+          <span id="section_content">
+            <br />
+            <code>
+              <pre>
+boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
+              >
+            </code>
+          </span>
+        </section>
+      </article>
+      <aside id="aside" class="left">
+        <span class="center">
+          <h1>commands</h1>
+          <br />
+        </span>
+        <span class="center_flex">
+          <span class="cmd_box center_flex">
+            <label for="dir_ls_in">ls directory: </label>
+            <input
+              type="text"
+              id="dir_ls_in"
+              name="dir_ls_in"
+              placeholder="/tmp"
+            />
+            <button
+              id="dir_ls_btn"
+              name="dir_ls_btn"
+              type="button"
+              onclick="dirLs()"
+            >
+              list directory
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="dir_size_in">directory size: </label>
+            <input
+              type="text"
+              id="dir_size_in"
+              name="dir_size_in"
+              placeholder="/tmp"
+            />
+            <button
+              id="dir_size_btn"
+              name="dir_size_btn"
+              type="button"
+              onclick="dirSize()"
+            >
+              get directory size
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="create_dirs_in">create nested directories: </label>
+            <input
+              type="text"
+              id="create_dirs_in"
+              name="create_dirs_in"
+              placeholder="/tmp/newDir1/newDir2"
+            />
+            <button
+              id="create_dirs_btn"
+              name="create_dirs_btn"
+              type="button"
+              onclick="createDirs()"
+            >
+              create directories
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="upload_file_in">upload a file: </label>
+            <input
+              type="file"
+              id="upload_file_in"
+              name="upload_file_in"
+              placeholder="photo.jpg"
+            />
+            <button
+              id="upload_file_btn"
+              name="upload_file_btn"
+              type="button"
+              onclick="uploadFile()"
+            >
+              upload file
+            </button>
+          </span>
+
+          <!-- 
+          <span class="cmd_box center_flex">
+            <form
+              action="/uploadfile"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <input name="InputFile" type="file" />
+              <input type="submit" value="Upload Now" />
+            </form>
+          </span>
+          -->
+        </span>
+      </aside>
+      <aside id="aside" class="right">
+        <span class="center">
+          <h1>ui</h1>
+          <span class="center_flex">
+            <button id="twoBtn" type="button" onclick="darkMode()">
+              toggle dark | light
+            </button>
+          </span>
+        </span>
+      </aside>
+      <footer id="footer">v0.1.0</footer>
+    </div>
+    <script src="/static/main.js"></script>
+  </body>
+</html>
