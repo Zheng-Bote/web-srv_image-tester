@@ -14,11 +14,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [Description](#description)
-  - [Features](#features)
+    - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
     - [Documentation](#documentation)
@@ -140,7 +139,6 @@ bla bla ... with a little help from my friends
 ## folder structure
 
 <!-- readme-tree start -->
-
 ```
 .
 ├── .github
@@ -162,17 +160,46 @@ bla bla ... with a little help from my friends
 │       ├── repo-create_doctoc.yml_
 │       ├── repo-create_doctoc_md.yml
 │       └── repo-create_tree_readme.yml
+├── .gitignore
 ├── LICENSE
-├── LICENSE_Apache-2
-├── LICENSE_GPL-2
-├── LICENSE_GPL-3
-├── LICENSE_MIT
 ├── README.md
+├── do_compile.sh
+├── src
+│   ├── CMakeLists.txt
+│   ├── configure
+│   │   ├── ClangTidy.cmake
+│   │   ├── Doxygen.cmake
+│   │   ├── do_pandoc.sh
+│   │   ├── doxygen.cfg
+│   │   ├── extra_headers
+│   │   └── rz_config.h.in
+│   ├── include
+│   │   ├── inicpp.h
+│   │   ├── rz_config.h
+│   │   ├── rz_datetime.cpp
+│   │   ├── rz_datetime.hpp
+│   │   ├── rz_filesystem.cpp
+│   │   ├── rz_filesystem.h
+│   │   ├── rz_html.h
+│   │   ├── rz_inifile.cpp
+│   │   ├── rz_inifile.hpp
+│   │   ├── rz_snippets.cpp
+│   │   ├── rz_snippets.hpp
+│   │   └── rz_string_lib.hpp
+│   ├── main
+│   ├── main.cpp
+│   ├── static
+│   │   ├── erg.txt
+│   │   ├── erg2.html
+│   │   ├── favicon.ico
+│   │   └── favicon.svg
+│   └── templates
+│       ├── about.html
+│       └── template.html
 └── tree.bak
 
-6 directories, 21 files
+11 directories, 46 files
 ```
-
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
