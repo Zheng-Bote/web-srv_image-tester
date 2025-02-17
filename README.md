@@ -1,7 +1,7 @@
 <div id="top" align="center">
 <h1>web-srv_image-tester</h1>
 
-<p>CXX23 webserver to test image content</p>
+<p>CXX23 webserver to check docker image content</p>
 
 [Report Issue](https://github.com/Zheng-Bote/web-srv_image-tester/issues) [Request Feature](https://github.com/Zheng-Bote/web-srv_image-tester/pulls)
 
