@@ -14,11 +14,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [Description](#description)
-  - [Features](#features)
+    - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
       - [README / Documentation](#readme--documentation)
@@ -273,7 +272,6 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
-
 ```
 .
 ├── .github
@@ -638,7 +636,6 @@ https://www.openssl.org/
 
 15 directories, 345 files
 ```
-
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
