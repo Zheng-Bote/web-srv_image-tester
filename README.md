@@ -39,6 +39,7 @@
 - [Usage](#usage)
   - [without parameter](#without-parameter)
   - [Parameters](#parameters)
+  - [Inifile](#inifile)
   - [from Source / Developement](#from-source--developement)
     - [Dependencies](#dependencies)
       - [CMake](#cmake)
