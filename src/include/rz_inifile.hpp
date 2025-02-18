@@ -10,9 +10,7 @@
 #pragma once
 
 #include "inicpp.h"
-
 #include "rz_datetime.hpp"
-
 #include "rz_string_lib.hpp"
 
 class Inifile
@@ -34,11 +32,18 @@ public:
     std::tuple<bool, std::string> loadIni(std::string &pathToFile);
 
     void setIniFileName(std::string &progname);
+    void setIniFile(std::string &pathToInifile);
     std::string getInifile();
     void listIniEntries();
+    std::map<std::string, std::string> getIniEntries();
 
     std::string getWebserverUrl();
     unsigned int getWebserverPort();
+    std::string getSslCert();
+    std::string getSslKey();
+    std::string getSslPem();
+    bool getUseSsl();
 
     std::string getSystemWriteDir();
+    std::string getUploadPath();
 };

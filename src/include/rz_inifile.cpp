@@ -12,6 +12,7 @@
 #include <print>
 #include <filesystem>
 #include <iostream>
+
 #include "rz_inifile.hpp"
 
 Inifile::Inifile()
@@ -39,6 +40,11 @@ void Inifile::setIniFileName(std::string &progname)
     Inifile::pathToInifile = progname + ".ini";
 }
 
+void Inifile::setIniFile(std::string &pathToInifile)
+{
+    Inifile::pathToInifile = pathToInifile;
+}
+
 std::string Inifile::getInifile()
 {
     return Inifile::pathToInifile;
@@ -53,7 +59,16 @@ void Inifile::createIni()
     myIni["Webserver"]["ssl_keyfile"] = "/path/to/keyfile.key";
     myIni["Webserver"]["ssl_pemfile"] = "none";
 
-    myIni["System"]["write_dir"] = "/tmp";
+    myIni["Webserver"]["write_dir"] = "/tmp";
+    myIni["Webserver"]["upload_dir"] = "/tmp/crow_web/uploads";
+
+    /*
+    myIni["System"]["PROG_NAME"] = PROG_NAME;
+    myIni["System"]["PROG_VERSION"] = PROG_VERSION;
+    myIni["System"]["PROG_HOMEPAGE"] = PROG_HOMEPAGE;
+    myIni["System"]["PROG_DESCRIPTION"] = PROG_DESCRIPTION;
+    myIni["System"]["PROG_BUILD_TYPE"] = PROG_BUILD_TYPE;
+    */
 }
 
 std::tuple<bool, std::string> Inifile::saveIniToFile(std::string &pathToFile)
@@ -103,9 +118,34 @@ unsigned int Inifile::getWebserverPort()
     return myIni["Webserver"]["port"].as<unsigned int>();
 }
 
+std::string Inifile::getSslCert()
+{
+    return myIni["Webserver"]["ssl_certfile"].as<std::string>();
+}
+
+std::string Inifile::getSslKey()
+{
+    return myIni["Webserver"]["ssl_keyfile"].as<std::string>();
+}
+
+std::string Inifile::getSslPem()
+{
+    return myIni["Webserver"]["ssl_pemfile"].as<std::string>();
+}
+
+bool Inifile::getUseSsl()
+{
+    return myIni["Webserver"]["use_ssl"].as<bool>();
+}
+
 std::string Inifile::getSystemWriteDir()
 {
     return myIni["System"]["write_dir"].as<std::string>();
+}
+
+std::string Inifile::getUploadPath()
+{
+    return myIni["System"]["upload_dir"].as<std::string>();
 }
 
 void Inifile::listIniEntries()
@@ -132,4 +172,25 @@ void Inifile::listIniEntries()
             std::println("{}={}", fieldName, field.as<std::string>());
         }
     }
+}
+
+std::map<std::string, std::string> Inifile::getIniEntries()
+{
+    std::map<std::string, std::string> iniMap;
+
+    for (const auto &sectionPair : myIni)
+    {
+        const std::string &sectionName = sectionPair.first;
+        const ini::IniSection &section = sectionPair.second;
+
+        for (const auto &fieldPair : sectionPair.second)
+        {
+            const std::string &fieldName = fieldPair.first;
+            const ini::IniField &field = fieldPair.second;
+
+            iniMap[sectionName + ": " + fieldName] = field.as<std::string>();
+        }
+    }
+
+    return iniMap;
 }

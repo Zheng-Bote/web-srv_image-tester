@@ -15,6 +15,7 @@
 #include <print>
 #include <string>
 #include <tuple>
+#include <map>
 
 class Snippets
 {
@@ -22,7 +23,12 @@ public:
     Snippets();
     ~Snippets();
 
+    std::map<std::string, std::string> getAbout();
+    void setSslStatus(std::string &sslStatus);
+
 private:
+    std::string prog_ssl{"OFF"};
+
 public:
     enum class Status
     {

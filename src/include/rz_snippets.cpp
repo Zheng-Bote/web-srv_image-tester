@@ -3,11 +3,33 @@
 #include <format>
 #include <print>
 #include <iostream>
+#include <map>
+
+#include "rz_config.h"
 
 Snippets::Snippets() {}
 
 Snippets::~Snippets()
 {
+}
+
+std::map<std::string, std::string> Snippets::getAbout()
+{
+    std::map<std::string, std::string> aboutMap;
+    aboutMap["PROG_NAME"] = PROG_NAME;
+    aboutMap["PROG_VERSION"] = PROG_VERSION;
+    aboutMap["PROG_HOMEPAGE"] = PROG_HOMEPAGE;
+    aboutMap["PROG_DESCRIPTION"] = PROG_DESCRIPTION;
+    aboutMap["PROG_BUILD_TYPE"] = PROG_BUILD_TYPE;
+
+    prog_ssl.compare("ON") == 0 ? aboutMap["PROG_SSL"] = "ON" : aboutMap["PROG_SSL"] = "OFF";
+
+    return aboutMap;
+}
+
+void Snippets::setSslStatus(std::string &sslStatus)
+{
+    prog_ssl = sslStatus;
 }
 
 /**

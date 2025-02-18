@@ -7,8 +7,8 @@ cmake_minimum_required(VERSION 3.23)
 
 project(
   crow_web
-  VERSION 0.2.0
-  DESCRIPTION "CXX23 webserver to test images"
+  VERSION 0.3.0
+  DESCRIPTION "CXX23 webserver to check docker image content"
   HOMEPAGE_URL "https://github.com/Zheng-Bote/web-srv_image-tester"
   LANGUAGES CXX)
 
@@ -20,7 +20,8 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER clang++)
 
-set(CROW_ENABLE_SSL OFF)
+set(CROW_ENABLE_SSL ON)
+set(CROW_ENABLE_COMPRESSION ON)
 
 set(PROG_NAME "${PROJECT_NAME}")
 set(PROG_VERSION "${PROJECT_VERSION}")
@@ -34,9 +35,12 @@ set(CXX_FLAGS_ALL "-m64 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -lpthread
 set(CXX_FLAGS_DEBUG "-g3 -O0")
 set(CXX_FLAGS_RELEASE "-O3")
 
+find_package(Crow)
+
 set(SRC_LIST main.cpp 
   include/rz_filesystem.cpp 
   include/inicpp.h 
+  include/rz_config.h
   include/rz_inifile.cpp 
   include/rz_datetime.cpp
   include/rz_snippets.cpp)
@@ -51,7 +55,6 @@ endif()
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
-
 IF(CMAKE_BUILD_TYPE MATCHES Debug)
     message("DEBUG mode")
     set(CMAKE_CXX_CLANG_TIDY clang-tidy;  -header-filter=.; -checks=cppcoreguidelines-*)
@@ -60,7 +63,7 @@ IF(CMAKE_BUILD_TYPE MATCHES Debug)
   #addclangtidy(${PROJECT_NAME})
 ENDIF()
 
-target_link_libraries(${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} PUBLIC Crow::Crow)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
@@ -71,7 +74,6 @@ doxygen(. docs)
 
 IF(CMAKE_BUILD_TYPE MATCHES Release)
   message("RELEASE mode")
-
 
   if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     message(STATUS "building SHA256sum on Linux ${CMAKE_SYSTEM_VERSION}")

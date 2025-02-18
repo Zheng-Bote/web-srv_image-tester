@@ -48,7 +48,7 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
         </span>
         <span class="center_flex">
           <span class="cmd_box center_flex">
-            <label for="dir_ls_in">ls directory: </label>
+            <label for="dir_ls_in">list directory content: </label>
             <input
               type="text"
               id="dir_ls_in"
@@ -61,12 +61,12 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
               type="button"
               onclick="dirLs()"
             >
-              list directory
+              list
             </button>
           </span>
 
           <span class="cmd_box center_flex">
-            <label for="dir_size_in">directory size: </label>
+            <label for="dir_size_in">get directory size: </label>
             <input
               type="text"
               id="dir_size_in"
@@ -79,7 +79,7 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
               type="button"
               onclick="dirSize()"
             >
-              get directory size
+              get
             </button>
           </span>
 
@@ -97,7 +97,7 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
               type="button"
               onclick="createDirs()"
             >
-              create directories
+              create
             </button>
           </span>
 
@@ -115,7 +115,7 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
               type="button"
               onclick="uploadFile()"
             >
-              upload file
+              upload
             </button>
           </span>
 
@@ -135,11 +135,37 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
       </aside>
       <aside id="aside" class="right">
         <span class="center">
-          <h1>ui</h1>
+          <h1>system</h1>
+          <br />
           <span class="center_flex">
+            <!--
             <button id="twoBtn" type="button" onclick="darkMode()">
               toggle dark | light
             </button>
+            -->
+            <span class="cmd_box cmd_box_right center_flex">
+              <label for="prog_info_btn">program info: </label>
+              <button
+                id="prog_info_btn"
+                name="prog_info_btnv"
+                type="button"
+                onclick="progInfo()"
+              >
+                get
+              </button>
+            </span>
+
+            <span class="cmd_box cmd_box_right center_flex">
+              <label for="list_ini_btn">list configuration: </label>
+              <button
+                id="list_ini_btn"
+                name="list_ini_btn"
+                type="button"
+                onclick="listIni()"
+              >
+                list
+              </button>
+            </span>
           </span>
         </span>
       </aside>

@@ -24,9 +24,16 @@ int main(int argc, char *argv[])
   bool oknok{false};
   std::string msg{""};
 
-  msg = argv[0];
-  sptr_ini_config->setIniFileName(msg);
-  msg = sptr_ini_config->getInifile();
+  if (argc < 2)
+  {
+    msg = argv[0];
+    sptr_ini_config->setIniFileName(msg);
+    msg = sptr_ini_config->getInifile();
+  }
+  else
+  {
+    msg = argv[1];
+  }
   sptr_snippets->checkFunctionReturn(sptr_ini_config->loadIni(msg), Snippets::Status::FATAL);
 
   // sptr_ini_config->listIniEntries();
@@ -35,18 +42,30 @@ int main(int argc, char *argv[])
 
   std::string prog_ssl{"OFF"};
 #ifdef PROG_SSL
-  prog_ssl = "ON";
-  app.ssl_file("/path/to/cert.crt", "/path/to/keyfile.key");
-  // app.ssl_file("/path/to/pem_file.pem");
+  if (sptr_ini_config->getUseSsl())
+  {
+    prog_ssl = "ON";
+    app.ssl_file(sptr_ini_config->getSslCert(), sptr_ini_config->getSslKey());
+    // app.ssl_file("/path/to/cert.crt", "/path/to/keyfile.key");
+    //  app.ssl_file("/path/to/pem_file.pem");
+  }
+  else
+  {
+    prog_ssl = "OFF";
+  }
 #else
   prog_ssl = "OFF";
 #endif
-
+  sptr_snippets->setSslStatus(prog_ssl);
   std::println("Webserver SSL is: {}", prog_ssl);
 
+  /* ##### Routing ##### */
+
   CROW_ROUTE(app, "/")
-  ([]()
-   { return "Hello world"; });
+  ([](const crow::request &, crow::response &res)
+   {
+        res.set_static_file_info("static/index.html");
+        res.end(); });
 
   CROW_ROUTE(app, "/status")
   ([](const crow::request &, crow::response &res)
@@ -55,6 +74,24 @@ int main(int argc, char *argv[])
         res.write("healthy");
         res.code = 200;
         res.end(); });
+
+  CROW_ROUTE(app, "/listini")
+  ([]
+   {
+        crow::json::wvalue x;
+        for (const auto &i : sptr_ini_config->getIniEntries()){
+            x[i.first] = i.second;
+        }
+        return x; });
+
+  CROW_ROUTE(app, "/proginfo")
+  ([]
+   {
+        crow::json::wvalue x;
+        for (const auto &i : sptr_snippets->getAbout()){
+            x[i.first] = i.second;
+        }
+        return x; });
 
   CROW_ROUTE(app, "/static/<string>")
   ([](const crow::request &, crow::response &res, std::string para)
@@ -145,7 +182,9 @@ int main(int argc, char *argv[])
                                        {
           crow::multipart::message file_message(req);
           crow::json::wvalue j;
-          for (const auto& part : file_message.part_map)
+          std::string pathToOutfile = sptr_ini_config->getUploadPath();
+
+          for (const auto &part : file_message.part_map)
           {
               const auto& part_name = part.first;
               const auto& part_value = part.second;
@@ -183,8 +222,11 @@ int main(int argc, char *argv[])
                       }
                   }
 
+                  Filesystem fileSystem;
+                  fileSystem.createDirectories(pathToOutfile);
+                  pathToOutfile += "/" + outfile_name;
                   // Create a new file with the extracted file name and write file contents to it
-                  std::ofstream out_file(outfile_name);
+                  std::ofstream out_file(pathToOutfile);
                   if (!out_file)
                   {
                     std::cout << " Write to file failed\n";
@@ -199,7 +241,7 @@ int main(int argc, char *argv[])
                 std::cout << " Value: " << part_value.body << '\n';
               }
           }
-          j["success"] = "file uploaded";
+          j["success"] = "file uploaded: " + pathToOutfile;
           return crow::response(j); });
 
   std::string prog_build_type = PROG_BUILD_TYPE;

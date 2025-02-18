@@ -144,6 +144,58 @@ async function upload_File() {
     });
 }
 
+function listIni() {
+  list_ini();
+}
+async function list_ini() {
+  fetch("/listini", {
+    method: "GET",
+  })
+    .then(async (response) => {
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function progInfo() {
+  prog_info();
+}
+async function prog_info() {
+  fetch("/proginfo", {
+    method: "GET",
+  })
+    .then(async (response) => {
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
 function output(data) {
   let output = document.getElementById("section_content");
   output.innerHTML = "";
@@ -151,7 +203,7 @@ function output(data) {
   let pre = document.createElement("pre");
 
   for (const key in data) {
-    pre.innerHTML += `\n${key}: ${data[key]}`;
+    pre.innerHTML += `${key}: ${data[key]}\n`;
   }
 
   code.appendChild(pre);

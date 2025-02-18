@@ -1,3 +1,8 @@
+/* 
+background-color: light-dark(#ffffff, #121212);
+--button-bg: light-dark(#007bff, #0056b3);
+*/
+
 :root {
   /* lightgrey */
   --background-color: oklch(86.69% 0 0);
@@ -232,6 +237,7 @@ section > .brief {
   text-align: center;
 }
 .center_flex {
+  /* align-content: center; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,6 +253,10 @@ section > .brief {
 .cmd_box > Button {
   margin: 5px;
   width: 180px;
+}
+.cmd_box_right > Button {
+  margin: 5px;
+  width: 150px;
 }
 .cmd_box > label {
   font-size: var(--font-size-small-dynamic);
