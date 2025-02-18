@@ -14,10 +14,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-    - [Features](#features)
+  - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
       - [README / Documentation](#readme--documentation)
@@ -215,6 +216,9 @@ No installation needed, the AppImage includes all dependencies. Just start in a 
 
 Compiled with Ubuntu clang version 18.1.3 (1ubuntu1), Target: x86_64-pc-linux-gnu (https://clang.llvm.org/cxx_status.html)
 
+> \[!NOTE]
+> should work with any compiler with C++23 support
+
 ### using SSL and compression
 
 CMakeLists.txt
@@ -223,9 +227,6 @@ CMakeLists.txt
 set(CROW_ENABLE_SSL ON)
 set(CROW_ENABLE_COMPRESSION ON)
 ```
-
-> \[!NOTE]
-> should work with any compiler with C++23 support
 
 ### Dependencies
 
@@ -271,6 +272,7 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
+
 ```
 .
 ├── .github
@@ -342,6 +344,7 @@ https://www.openssl.org/
 
 13 directories, 54 files
 ```
+
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
