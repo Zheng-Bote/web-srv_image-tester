@@ -246,7 +246,6 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
-
 ```
 .
 ├── .github
@@ -272,6 +271,15 @@ https://www.openssl.org/
 ├── LICENSE
 ├── README.md
 ├── do_compile.sh
+├── docs
+│   └── img
+│       ├── 01_en.png
+│       ├── 02_en.png
+│       ├── 03_en.png
+│       ├── 04_en.png
+│       ├── 05_en.png
+│       ├── 06_en.png
+│       └── 07_en.png
 ├── src
 │   ├── CMakeLists.txt
 │   ├── configure
@@ -296,6 +304,7 @@ https://www.openssl.org/
 │   │   └── rz_string_lib.hpp
 │   ├── main.cpp
 │   ├── static
+│   │   ├── crow_web.ini
 │   │   ├── favicon.ico
 │   │   ├── favicon.svg
 │   │   ├── index.html
@@ -306,9 +315,8 @@ https://www.openssl.org/
 │       └── template.html
 └── tree.bak
 
-11 directories, 46 files
+13 directories, 54 files
 ```
-
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
