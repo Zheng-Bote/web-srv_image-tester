@@ -183,6 +183,7 @@ int main(int argc, char *argv[])
           crow::multipart::message file_message(req);
           crow::json::wvalue j;
           std::string pathToOutfile = sptr_ini_config->getUploadPath();
+          std::println("Upload path: {}", pathToOutfile);
 
           for (const auto &part : file_message.part_map)
           {
@@ -224,7 +225,8 @@ int main(int argc, char *argv[])
 
                   Filesystem fileSystem;
                   fileSystem.createDirectories(pathToOutfile);
-                  pathToOutfile += "/" + outfile_name;
+                  pathToOutfile = pathToOutfile + "/" + outfile_name;
+                  std::println("Path to outfile: {}", pathToOutfile);
                   // Create a new file with the extracted file name and write file contents to it
                   std::ofstream out_file(pathToOutfile);
                   if (!out_file)

@@ -1,12 +1,12 @@
 <div id="top" align="center">
-<h1>web-srv_image-tester</h1>
+<h1>Webserver to check content of a Docker image</h1>
 
-<p>CXX23 webserver to check docker image content</p>
+<p>Crow webserver to check docker image content</p>
 
 [Report Issue](https://github.com/Zheng-Bote/web-srv_image-tester/issues) [Request Feature](https://github.com/Zheng-Bote/web-srv_image-tester/pulls)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-![GitHub Created At](https://img.shields.io/github/created-at/Zheng-Bote/web-srv_image-tester)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/web-srv_image-tester?logo=GitHub)](https://github.com/Zheng-Bote/web-srv_image-tester/releases)
 
 </div>
 
@@ -14,10 +14,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-    - [Features](#features)
+  - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
     - [Documentation](#documentation)
@@ -56,12 +57,10 @@
 # Description
 
 ![CXX](https://img.shields.io/badge/C++-23-blue?logo=cplusplus)
-![Angular](https://img.shields.io/badge/Angular-18+-red?logo=angular)
-![Vue](https://img.shields.io/badge/Vue-3+-4FC08D?logo=vuedotjs)
 ![HTML5](https://img.shields.io/badge/HTML-5+-E34F26?logo=html5)
-![Typescript](https://img.shields.io/badge/TypeScript-5+-3178C6?logo=typescript)
+![Javascript](https://img.shields.io/badge/JavaScript-vanilla-3178C6?logo=javascript)
 
-C++23 Crow webserver to test content of Docker image.
+C++23 Crow webserver to check the content of a Docker image.
 
 ### Features
 
@@ -95,20 +94,16 @@ C++23 Crow webserver to test content of Docker image.
 
 ### Application / Tool
 
-![Status](https://img.shields.io/badge/Status-under_construction-red)
-
-<!-- ![Status](https://img.shields.io/badge/Status-works-green) -->
-
+![GitHub Created At](https://img.shields.io/github/created-at/Zheng-Bote/web-srv_image-tester)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/web-srv_image-tester?logo=GitHub)](https://github.com/Zheng-Bote/web-srv_image-tester)
+![Status](https://img.shields.io/badge/Status-useable-green)
+![Status](https://img.shields.io/badge/Status-works_as_designed-green)
 ![GitHub Release Date](https://img.shields.io/github/release-date/Zheng-Bote/web-srv_image-tester)
 
 ![GitHub Issues](https://img.shields.io/github/issues/Zheng-Bote/web-srv_image-tester)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Zheng-Bote/web-srv_image-tester)
 
-### Documentation
-
-_see also:_ [Application Documentation](#documentation)
-
-#### README
+#### README / Documentation
 
 [![Repo - create Repo-Tree in README.md](https://github.com/Zheng-Bote/web-srv_image-tester/actions/workflows/repo-create_tree_readme.yml/badge.svg)](https://github.com/Zheng-Bote/web-srv_image-tester/actions/workflows/repo-create_tree_readme.yml)
 [![Repo - add Actions In/Out to README](https://github.com/Zheng-Bote/web-srv_image-tester/actions/workflows/repo-actions_docu.yml/badge.svg)](https://github.com/Zheng-Bote/web-srv_image-tester/actions/workflows/repo-actions_docu.yml)
@@ -128,17 +123,130 @@ create ToC in Markdown files in folders
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+# Documentation
+
+## Screenshots
+
+### Startpage
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/01_en.png)
+
+### list directory content with permissions
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/02_en.png)
+
+### get directory size in Bytes
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/03_en.png)
+
+### create (nested) directories
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/04_en.png)
+
+### upload a file
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/05_en.png)
+
+### crow_web program info
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/06_en.png)
+
+### list program (inifile) configuration
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/07_en.png)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 # Installation
 
-bla bla ... everything easy and green with No Code/Low code and without any costs
+## Linux
 
-## Dependencies
+### AppImage
 
-bla bla ... with a little help from my friends
+No installation needed, the AppImage includes all dependencies. Just start in a shell the AppImage `crow_web-x86_64.AppImage`, optional with a given Inifile `crow_web-x86_64.AppImage <pathToInifile>`
 
-## folder structure
+### Debian package (deb)
+
+**_still under construction_**
+
+# Usage
+
+## without parameter
+
+the program looks for an Inifile `<program_folder>/<prog_name>.ini`
+
+```bash
+./crow_web
+./crow_web-x86_64.AppImage
+```
+
+## Parameters
+
+Execute the program with a given Inifile.
+
+| Parameter | Type     | Description                      |
+| :-------- | :------- | :------------------------------- |
+| inifile   | `string` | _Optional_ `<path_to>/<inifile>` |
+
+```bash
+./crow_web static/crow_web.ini
+./crow_web-x86_64.AppImage static/crow_web.ini
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## from Source / Developement
+
+compiled with Ubuntu clang version 18.1.3 (1ubuntu1), Target: x86_64-pc-linux-gnu (https://clang.llvm.org/cxx_status.html)
+
+> \[!NOTE]
+> should work with any compiler with C++23 support
+
+### Dependencies
+
+> \[!NOTE]
+> All licenses are therefore Open Source.
+
+#### CMake
+
+CMake: A Powerful Software Build System
+
+[![CMake](https://img.shields.io/badge/CMake-v3.23+-064F8C?logo=cmake)](https://github.com/conan-io/conan)
+[![BSD-3 License](https://img.shields.io/badge/License-BSD_3-green.svg)](https://choosealicense.com/licenses/bsd-3-clause/)
+
+#### Crow
+
+Crow is a C++ framework for creating HTTP or Websocket web services. A Fast and Easy to use microframework for the web.
+
+https://crowcpp.org/master/
+
+[![BSD-3 License](https://img.shields.io/badge/License-BSD_3-green.svg)](https://choosealicense.com/licenses/bsd-3-clause/)
+
+#### inifile-cpp
+
+inifile-cpp is a simple and easy to use single header-only ini file en- and decoder for C++.
+
+https://github.com/Rookfighter/inifile-cpp
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+#### OpenSSL (optional)
+
+> \[!NOTE]
+> only needed if the webserver should run secured with https
+
+OpenSSL - a robust, commercial-grade, full-featured toolkit for general-purpose cryptography and secure communication.
+
+https://www.openssl.org/
+
+[![Apache License](https://img.shields.io/badge/License-Apache-green.svg)](https://choosealicense.com/licenses/apache/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### folder structure
 
 <!-- readme-tree start -->
+
 ```
 .
 ├── .github
@@ -200,160 +308,8 @@ bla bla ... with a little help from my friends
 
 11 directories, 46 files
 ```
+
 <!-- readme-tree end -->
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Usage/Examples/Tests
-
-bla bla ... usage is intuitive and runs mostly automatically with no needs of any knowledge
-
-```HTML
-<mark> under construction </mark>
-```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-# API Reference
-
-<hr>
-
-![GHA](https://img.shields.io/badge/Github-Action-black?logo=githubactions)
-
-_Inputs/Outputs will be filled automatically by `.github/workflows/repo-actions_docu.yml`_
-
-## Inputs
-
-## Outputs
-
-<hr>
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Parameters
-
-**Workflow or program**
-
-| Parameter    | Type     | Description                          |
-| :----------- | :------- | :----------------------------------- |
-| `name`       | `string` | _Optional_ name-of-copyright-holder  |
-| `created`    | `string` | _Optional_ <YYYY>                    |
-| `version`    | `string` | _Optional_ \<v0.0.0>                 |
-| `link_left`  | `string` | _Optional_ link-to-contact-page      |
-| `link_right` | `string` | _Optional_ link-to-legal-notice-page |
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-# Documentation
-
-see also: <https://linktodocumentation>
-
-## Architecture
-
-### Github
-
-#### Github Repo
-
-```mermaid
-block-beta
-  columns 4
-  Repo:4
-  block:group1:1
-    columns 1
-    id0[".github"]
-    block:group2:1
-      columns 1
-      id1[["workflows"]]
-      id2[["actions"]]
-    end
-  end
-  docs dist src
-  block:group3:4
-    %% columns auto (default)
-    A["gh-pages"] B["gh-wiki"]
-  end
-```
-
-#### Github Actions / Workflows
-
-```mermaid
-flowchart TD;
-    A[Workflow]-. parameter .->B[[callable Workflow]]
-    B-- parameter -->C[Action]
-    C-->D(README)
-
-    A[Workflow]-. parameter .->E[[callable Workflow]]
-    E-- parameter -->F[Action]
-    F-->J(Markdown files)
-
-    A[Workflow]-->K[[Workflow]]
-    K-->L[Action]
-    L-->M("GH-Pages")
-
-    A[Workflow]-->N[[Workflow]]
-    N-->O[Action]
-    O-->P("GH-Wiki")
-```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Application
-
-```mermaid
-architecture-beta
-    group api(cloud)[API]
-
-    service db(database)[Database] in api
-    service server0(server)[Webserver] in api
-    service disk2(disk)[Storage] in api
-    service server(server)[Appserver] in api
-
-    db:L -- R:server
-    server0:T -- B:server
-    disk2:T -- B:server
-```
-
-## DevOps
-
-```mermaid
-pie title me
-         "ideas" : 90
-         "time for realizations" : 7
-         "money for realizations" : 3
-```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Github Page
-
-[![GH-Page](https://img.shields.io/badge/Github-Pages-black?logo=github)](https://www.github.com/Zheng-Bote)
-
-## Github Wiki
-
-[![GH-Wiki](https://img.shields.io/badge/Github-Wiki-black?logo=github)](https://www.github.com/Zheng-Bote)
-
-## Comments
-
-> \[!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> \[!TIP]
-> Helpful advice for doing things better or more easily.
-
-> \[!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> \[!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> \[!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -361,11 +317,7 @@ pie title me
 
 ## License
 
-**This web-srv_image-tester is using the MIT-License**
-
-**_other licenses see files `LICENSE_<name>`\_**
-
-### MIT License
+**MIT License**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
@@ -390,22 +342,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
         https://choosealicense.com/licenses/mit/
-
-### Apache License
-
-[![Apache License](https://img.shields.io/badge/License-Apache_v2.0-green.svg)](<[https://choosealicense.com/licenses/mit/](http://www.apache.org/licenses/LICENSE-2.0)>)
-
-Copyright (c) 2019 ZHENG Robert
-
-Licensed under the **Apache License, Version 2.0** (the "License"); you may not use this file except in compliance with the License.
-
-You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-See the License for the specific language governing permissions and limitations under the License.
 
 ## Authors
 

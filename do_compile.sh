@@ -4,6 +4,6 @@ cd build
 cmake -B . -S ../src -DCMAKE_BUILD_TYPE=Release
 cmake --build . --parallel 6
 
-./crow_web
+./crow_web static/crow_web.ini
 
 #clear

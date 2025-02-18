@@ -140,12 +140,12 @@ bool Inifile::getUseSsl()
 
 std::string Inifile::getSystemWriteDir()
 {
-    return myIni["System"]["write_dir"].as<std::string>();
+    return myIni["Webserver"]["write_dir"].as<std::string>();
 }
 
 std::string Inifile::getUploadPath()
 {
-    return myIni["System"]["upload_dir"].as<std::string>();
+    return myIni["Webserver"]["upload_dir"].as<std::string>();
 }
 
 void Inifile::listIniEntries()
