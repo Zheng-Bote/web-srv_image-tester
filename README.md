@@ -14,10 +14,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-    - [Features](#features)
+  - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
       - [README / Documentation](#readme--documentation)
@@ -157,18 +158,6 @@ create ToC in Markdown files in folders
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-# Installation
-
-## Linux
-
-### AppImage
-
-No installation needed, the AppImage includes all dependencies. Just start in a shell the AppImage `crow_web-x86_64.AppImage`, optional with a given Inifile `crow_web-x86_64.AppImage <pathToInifile>`
-
-### Debian package (deb)
-
-**_still under construction_**
-
 # Usage
 
 ## without parameter
@@ -208,6 +197,18 @@ upload_dir = /tmp/crow_web/uploads                # Path to the directory where 
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+# Installation
+
+## Linux
+
+### AppImage
+
+No installation needed, the AppImage includes all dependencies. Just start in a shell the AppImage `crow_web-x86_64.AppImage`, optional with a given Inifile `crow_web-x86_64.AppImage <pathToInifile>`
+
+### Debian package (deb)
+
+**_still under construction_**
 
 ## from Source / Developement
 
@@ -260,6 +261,7 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
+
 ```
 .
 ├── .github
@@ -331,6 +333,7 @@ https://www.openssl.org/
 
 13 directories, 54 files
 ```
+
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
