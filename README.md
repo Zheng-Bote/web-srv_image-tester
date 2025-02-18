@@ -14,11 +14,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [Description](#description)
-  - [Features](#features)
+    - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
       - [README / Documentation](#readme--documentation)
@@ -32,14 +31,14 @@
     - [upload a file](#upload-a-file)
     - [crow_web program info](#crow_web-program-info)
     - [list program (inifile) configuration](#list-program-inifile-configuration)
-- [Installation](#installation)
-  - [Linux](#linux)
-    - [AppImage](#appimage)
-    - [Debian package (deb)](#debian-package-deb)
 - [Usage](#usage)
   - [without parameter](#without-parameter)
   - [Parameters](#parameters)
   - [Inifile](#inifile)
+- [Installation](#installation)
+  - [Linux](#linux)
+    - [AppImage](#appimage)
+    - [Debian package (deb)](#debian-package-deb)
   - [from Source / Developement](#from-source--developement)
     - [Dependencies](#dependencies)
       - [CMake](#cmake)
