@@ -40,6 +40,7 @@
     - [AppImage](#appimage)
     - [Debian package (deb)](#debian-package-deb)
   - [from Source / Developement](#from-source--developement)
+    - [using SSL and compression](#using-ssl-and-compression)
     - [Dependencies](#dependencies)
       - [CMake](#cmake)
       - [Crow](#crow)
