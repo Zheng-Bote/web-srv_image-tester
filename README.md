@@ -80,6 +80,7 @@ C++23 Crow webserver to check the content of a Docker image.
 - \[x] Packagemanager (CMake)
 - \[x] Installation routine (AppImage)
 - \[ ] portable application
+- \[x] supports SSL (https)
 
 <br>
 
@@ -213,7 +214,16 @@ No installation needed, the AppImage includes all dependencies. Just start in a 
 
 ## from Source / Developement
 
-compiled with Ubuntu clang version 18.1.3 (1ubuntu1), Target: x86_64-pc-linux-gnu (https://clang.llvm.org/cxx_status.html)
+Compiled with Ubuntu clang version 18.1.3 (1ubuntu1), Target: x86_64-pc-linux-gnu (https://clang.llvm.org/cxx_status.html)
+
+### using SSL and compression
+
+CMakeLists.txt
+
+```CMakeLists.txt
+set(CROW_ENABLE_SSL ON)
+set(CROW_ENABLE_COMPRESSION ON)
+```
 
 > \[!NOTE]
 > should work with any compiler with C++23 support
@@ -249,7 +259,7 @@ https://github.com/Rookfighter/inifile-cpp
 #### OpenSSL (optional)
 
 > \[!NOTE]
-> only needed if the webserver should run secured with https
+> only needed if the web-applicationserver should run secured with https
 
 OpenSSL - a robust, commercial-grade, full-featured toolkit for general-purpose cryptography and secure communication.
 
@@ -347,7 +357,7 @@ https://www.openssl.org/
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-Copyright (c) 2024 ZHENG Robert
+Copyright (c) 2025 ZHENG Robert
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

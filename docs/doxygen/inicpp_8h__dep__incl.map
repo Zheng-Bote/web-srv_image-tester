@@ -1,0 +1,7 @@
+<map id="include/inicpp.h" name="include/inicpp.h">
+<area shape="rect" id="Node000001" title="A header&#45;only and easy to use Ini file parser for C++." alt="" coords="21,5,145,31"/>
+<area shape="rect" id="Node000002" href="$rz__inifile_8hpp_source.html" title=" " alt="" coords="5,79,161,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,44,86,79,81,79,81,44"/>
+<area shape="rect" id="Node000003" href="$rz__inifile_8cpp.html" title="classlib for inicpp.h" alt="" coords="6,152,161,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,118,86,152,81,152,81,118"/>
+</map>
