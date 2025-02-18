@@ -14,39 +14,39 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [Description](#description)
-  - [Features](#features)
+    - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
-    - [Documentation](#documentation)
-      - [README](#readme)
+      - [README / Documentation](#readme--documentation)
       - [other Markdown files](#other-markdown-files)
-- [Installation](#installation)
-  - [Dependencies](#dependencies)
-  - [folder structure](#folder-structure)
-  - [Usage/Examples/Tests](#usageexamplestests)
-- [API Reference](#api-reference)
-  - [Inputs](#inputs)
-  - [Outputs](#outputs)
-  - [Parameters](#parameters)
-- [Documentation](#documentation-1)
-  - [Architecture](#architecture)
-    - [Github](#github)
-      - [Github Repo](#github-repo)
-      - [Github Actions / Workflows](#github-actions--workflows)
-  - [Application](#application)
-  - [DevOps](#devops)
-  - [Github Page](#github-page)
-  - [Github Wiki](#github-wiki)
-  - [Comments](#comments)
+- [Documentation](#documentation)
   - [Screenshots](#screenshots)
+    - [Startpage](#startpage)
+    - [list directory content with permissions](#list-directory-content-with-permissions)
+    - [get directory size in Bytes](#get-directory-size-in-bytes)
+    - [create (nested) directories](#create-nested-directories)
+    - [upload a file](#upload-a-file)
+    - [crow_web program info](#crow_web-program-info)
+    - [list program (inifile) configuration](#list-program-inifile-configuration)
+- [Installation](#installation)
+  - [Linux](#linux)
+    - [AppImage](#appimage)
+    - [Debian package (deb)](#debian-package-deb)
+- [Usage](#usage)
+  - [without parameter](#without-parameter)
+  - [Parameters](#parameters)
+  - [from Source / Developement](#from-source--developement)
+    - [Dependencies](#dependencies)
+      - [CMake](#cmake)
+      - [Crow](#crow)
+      - [inifile-cpp](#inifile-cpp)
+      - [OpenSSL (optional)](#openssl-optional)
+    - [folder structure](#folder-structure)
 - [Authors and License](#authors-and-license)
   - [License](#license)
-    - [MIT License](#mit-license)
-    - [Apache License](#apache-license)
   - [Authors](#authors)
     - [Code Contributors](#code-contributors)
 
@@ -260,7 +260,6 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
-
 ```
 .
 ├── .github
@@ -286,6 +285,15 @@ https://www.openssl.org/
 ├── LICENSE
 ├── README.md
 ├── do_compile.sh
+├── docs
+│   └── img
+│       ├── 01_en.png
+│       ├── 02_en.png
+│       ├── 03_en.png
+│       ├── 04_en.png
+│       ├── 05_en.png
+│       ├── 06_en.png
+│       └── 07_en.png
 ├── src
 │   ├── CMakeLists.txt
 │   ├── configure
@@ -310,6 +318,7 @@ https://www.openssl.org/
 │   │   └── rz_string_lib.hpp
 │   ├── main.cpp
 │   ├── static
+│   │   ├── crow_web.ini
 │   │   ├── favicon.ico
 │   │   ├── favicon.svg
 │   │   ├── index.html
@@ -320,9 +329,8 @@ https://www.openssl.org/
 │       └── template.html
 └── tree.bak
 
-11 directories, 46 files
+13 directories, 54 files
 ```
-
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
