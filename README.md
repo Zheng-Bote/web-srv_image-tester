@@ -273,7 +273,6 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
-
 ```
 .
 ├── .github
@@ -638,7 +637,6 @@ https://www.openssl.org/
 
 15 directories, 345 files
 ```
-
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
