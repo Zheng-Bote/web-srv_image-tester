@@ -1,7 +1,7 @@
 <div id="top" align="center">
 <h1>web-srv_image-tester</h1>
 
-<p>CXX23 webserver to test image content</p>
+<p>CXX23 webserver to check docker image content</p>
 
 [Report Issue](https://github.com/Zheng-Bote/web-srv_image-tester/issues) [Request Feature](https://github.com/Zheng-Bote/web-srv_image-tester/pulls)
 
@@ -186,13 +186,13 @@ bla bla ... with a little help from my friends
 │   │   ├── rz_snippets.cpp
 │   │   ├── rz_snippets.hpp
 │   │   └── rz_string_lib.hpp
-│   ├── main
 │   ├── main.cpp
 │   ├── static
-│   │   ├── erg.txt
-│   │   ├── erg2.html
 │   │   ├── favicon.ico
-│   │   └── favicon.svg
+│   │   ├── favicon.svg
+│   │   ├── index.html
+│   │   ├── main.css
+│   │   └── main.js
 │   └── templates
 │       ├── about.html
 │       └── template.html
