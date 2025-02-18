@@ -193,6 +193,20 @@ Execute the program with a given Inifile.
 ./crow_web-x86_64.AppImage static/crow_web.ini
 ```
 
+## Inifile
+
+```inifile
+[Webserver]
+url = http://localhost                            # currently not in use
+port = 8182
+ssl_certfile = /etc/crow_web/ssl/cert.pem
+ssl_keyfile = /etc/crow_web/ssl/key.pem
+ssl_pemfile = none
+use_ssl = false
+write_dir = /tmp                                  # Path to the directory to write files
+upload_dir = /tmp/crow_web/uploads                # Path to the directory where uploaded files are stored
+```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## from Source / Developement
