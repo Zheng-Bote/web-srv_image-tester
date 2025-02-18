@@ -14,10 +14,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-    - [Features](#features)
+  - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
       - [README / Documentation](#readme--documentation)
@@ -76,8 +77,8 @@ C++23 Crow webserver to check the content of a Docker image.
 <br>
 
 - \[x] some more or less usefull Github Actions for GH-repo, GH-pages, GH-wiki, CI/CD-Pipelines
-- \[ ] Packagemanager
-- \[ ] Installation routine
+- \[x] Packagemanager (CMake)
+- \[x] Installation routine (AppImage)
 - \[ ] portable application
 
 <br>
@@ -261,6 +262,7 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
+
 ```
 .
 ├── .github
@@ -332,6 +334,7 @@ https://www.openssl.org/
 
 13 directories, 54 files
 ```
+
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
