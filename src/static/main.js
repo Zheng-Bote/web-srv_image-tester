@@ -1,6 +1,22 @@
 window.onload = start;
 
-function start() {}
+function start() {
+  document
+    .getElementById("header_right")
+    .addEventListener("click", function () {
+      gotoGithub();
+    });
+  document.getElementById("footer").addEventListener("click", function () {
+    gotoGithubRepo();
+  });
+}
+
+function gotoGithub() {
+  window.open("https://github.com/Zheng-Bote");
+}
+function gotoGithubRepo() {
+  window.open("https://github.com/Zheng-Bote/web-srv_image-tester");
+}
 
 function dirLs() {
   let input = document.getElementById("dir_ls_in").value;
@@ -104,6 +120,40 @@ async function create_Dirs(path) {
     });
 }
 
+function rmDirs() {
+  let input = document.getElementById("rm_dirs_in").value;
+
+  if (input.length == 0) {
+    alert("Please enter a directory");
+  } else {
+    rm_Dirs(input);
+  }
+}
+async function rm_Dirs(path) {
+  fetch("/rmdirs", {
+    method: "POST",
+    body: JSON.stringify({ target: path }),
+  })
+    .then(async (response) => {
+      // get json response here
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
 function uploadFile() {
   let input = document.getElementById("upload_file_in").value;
 
@@ -123,6 +173,145 @@ async function upload_File() {
     method: "POST",
     enctype: "multipart/form-data",
     body: data,
+  })
+    .then(async (response) => {
+      // get json response here
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function fileSize() {
+  let target = document.getElementById("size_file_in").value;
+
+  if (target.length == 0) {
+    alert("Please enter a file");
+  } else {
+    file_size(target);
+  }
+}
+async function file_size(target) {
+  fetch("/filesize", {
+    method: "POST",
+    body: JSON.stringify({ target: target }),
+  })
+    .then(async (response) => {
+      // get json response here
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function writeTimeFile() {
+  let target = document.getElementById("wtime_file_in").value;
+
+  if (target.length == 0) {
+    alert("Please enter a file");
+  } else {
+    writeTime_File(target);
+  }
+}
+async function writeTime_File(target) {
+  fetch("/filewtime", {
+    method: "POST",
+    body: JSON.stringify({ target: target }),
+  })
+    .then(async (response) => {
+      // get json response here
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function cpFile() {
+  let source = document.getElementById("cp_file_source").value;
+  let target = document.getElementById("cp_file_target").value;
+
+  if (source.length == 0) {
+    alert("Please enter a source directory");
+  } else if (target.length == 0) {
+    alert("Please enter a target directory");
+  } else {
+    cp_file(source, target);
+  }
+}
+async function cp_file(source, target) {
+  fetch("/cpfile", {
+    method: "POST",
+    body: JSON.stringify({ target: target, source: source }),
+  })
+    .then(async (response) => {
+      // get json response here
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function delFile() {
+  let input = document.getElementById("del_file_in").value;
+
+  if (input.length == 0) {
+    alert("Please enter a file");
+  } else {
+    del_File(input);
+  }
+}
+async function del_File(path) {
+  fetch("/rmfile", {
+    method: "POST",
+    body: JSON.stringify({ target: path }),
   })
     .then(async (response) => {
       // get json response here
@@ -175,6 +364,32 @@ function progInfo() {
 }
 async function prog_info() {
   fetch("/proginfo", {
+    method: "GET",
+  })
+    .then(async (response) => {
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function listVMounts() {
+  listV_Mounts();
+}
+async function listV_Mounts() {
+  fetch("/getvmounts", {
     method: "GET",
   })
     .then(async (response) => {

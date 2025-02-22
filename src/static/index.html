@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Checker</title>
     <meta name="description" content="check the content of a docker image" />
-    <meta name="version" content="v00.01.00" />
+    <meta name="version" content="v00.02.00" />
     <meta name="author" content="ZHENG Robert" />
 
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
@@ -102,6 +102,26 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
           </span>
 
           <span class="cmd_box center_flex">
+            <label for="rm_dirs_in">delete nested directories: </label>
+            <input
+              type="text"
+              id="rm_dirs_in"
+              name="rm_dirs_in"
+              placeholder="/tmp/newDir1"
+            />
+            <button
+              id="rm_dirs_btn"
+              name="rm_dirs_btn"
+              type="button"
+              onclick="rmDirs()"
+            >
+              delete
+            </button>
+          </span>
+          <br />
+          <hr />
+          <br />
+          <span class="cmd_box center_flex">
             <label for="upload_file_in">upload a file: </label>
             <input
               type="file"
@@ -116,6 +136,84 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
               onclick="uploadFile()"
             >
               upload
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="size_file_in">get file size: </label>
+            <input
+              type="text"
+              id="size_file_in"
+              name="size_file_in"
+              placeholder="/tmp/photo.jpg"
+            />
+            <button
+              id="size_file_btn"
+              name="size_file_btn"
+              type="button"
+              onclick="fileSize()"
+            >
+              get
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="wtime_file_in">get file last write time: </label>
+            <input
+              type="text"
+              id="wtime_file_in"
+              name="wtime_file_in"
+              placeholder="/tmp/photo.jpg"
+            />
+            <button
+              id="wtime_file_btn"
+              name="wtime_file_btn"
+              type="button"
+              onclick="writeTimeFile()"
+            >
+              get
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="cp_file">copy file: </label>
+            <input
+              type="text"
+              id="cp_file_source"
+              name="cp_file_source"
+              placeholder="/tmp/source.jpg"
+            />
+            <input
+              type="text"
+              id="cp_file_target"
+              name="cp_file_target"
+              placeholder="/tmp/dir/target.jpg"
+            />
+            <button
+              id="cp_file_btn"
+              name="cp_file_btn"
+              type="button"
+              onclick="cpFile()"
+            >
+              copy
+            </button>
+          </span>
+
+          <span class="cmd_box center_flex">
+            <label for="del_file_in">delete file: </label>
+            <input
+              type="text"
+              id="del_file_in"
+              name="del_file_in"
+              placeholder="/tmp/photo.jpg"
+            />
+            <button
+              id="del_file_btn"
+              name="del_file_btn"
+              type="button"
+              onclick="delFile()"
+            >
+              delete
             </button>
           </span>
 
@@ -166,10 +264,21 @@ boss@compjuta: ~it's nice 2 be a price, but it's higher 2 be bayer ^_*</pre
                 list
               </button>
             </span>
+            <br><hr><br>
+            <span class="cmd_box cmd_box_right center_flex">
+              <label for="list_vmount_btn">list visible Mounts: </label>
+              <button
+                id="list_vmount_btn"
+                name="list_vmount_btn"
+                type="button"
+                onclick="listVMounts()"
+              >
+                list
+              </button>
           </span>
         </span>
       </aside>
-      <footer id="footer">v0.1.0</footer>
+      <footer id="footer">v0.2.0</footer>
     </div>
     <script src="/static/main.js"></script>
   </body>

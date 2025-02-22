@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.23)
 
 project(
   crow_web
-  VERSION 0.3.1
+  VERSION 0.4.0
   DESCRIPTION "CXX23 webserver to check docker image content"
   HOMEPAGE_URL "https://github.com/Zheng-Bote/web-srv_image-tester"
   LANGUAGES CXX)
@@ -43,7 +43,9 @@ set(SRC_LIST main.cpp
   include/rz_config.h
   include/rz_inifile.cpp 
   include/rz_datetime.cpp
-  include/rz_snippets.cpp)
+  include/rz_snippets.cpp
+  include/rz_string_lib.hpp
+)
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
   set(CMAKE_CXX_FLAGS "${CXX_FLAGS_DEBUG} ${CXX_FLAGS_ALL}")
@@ -63,7 +65,7 @@ IF(CMAKE_BUILD_TYPE MATCHES Debug)
   #addclangtidy(${PROJECT_NAME})
 ENDIF()
 
-target_link_libraries(${PROJECT_NAME} PUBLIC Crow::Crow)
+target_link_libraries(${PROJECT_NAME} PUBLIC Crow::Crow )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})

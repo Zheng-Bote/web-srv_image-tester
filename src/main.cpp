@@ -6,6 +6,7 @@
 #include <print>
 #include <tuple>
 #include <unordered_map>
+#include <cstdio>
 
 #include "include/rz_snippets.hpp"
 #include "include/rz_datetime.hpp"
@@ -93,6 +94,16 @@ int main(int argc, char *argv[])
         }
         return x; });
 
+  CROW_ROUTE(app, "/getvmounts")
+  ([]
+   {
+        crow::json::wvalue x;
+        Filesystem fileSystem;
+        for (const auto &i : fileSystem.getVisibleMounts()){
+            x[i.first] = i.second;
+        }
+        return x; });
+
   CROW_ROUTE(app, "/static/<string>")
   ([](const crow::request &, crow::response &res, std::string para)
    {
@@ -154,6 +165,108 @@ int main(int argc, char *argv[])
             j["success"] = "created " + path;
           }
 
+          return crow::response{j}; });
+
+  CROW_ROUTE(app, "/rmdirs")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
+          std::cout << "target: " << x["target"] << std::endl;
+
+          Filesystem fileSystem;
+          crow::json::wvalue j;
+          std::string path = x["target"].s();
+          if (!fileSystem.removeDirectories(path))
+          {
+            j["error"] = "failed deleting " + path;
+          }
+          else{
+            j["success"] = "deleted " + path;
+          }
+
+          return crow::response{j}; });
+
+  CROW_ROUTE(app, "/cpfile")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("source"))
+          {
+            return crow::response(400);
+          }
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
+
+          Filesystem fileSystem;
+          crow::json::wvalue j;
+          std::string source = x["source"].s();
+          std::string target = x["target"].s();
+          if (!fileSystem.copyFile(source, target))
+          {
+            j["error"] = "failed copying " + source + " to " + target;
+          }
+          else{
+            j["success"] = "copied " + source + " to " + target;
+          }
+
+          return crow::response{j}; });
+
+  CROW_ROUTE(app, "/rmfile")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
+         
+          crow::json::wvalue j;
+          std::string target = x["target"].s();
+          if (!std::filesystem::remove(target))
+          {
+            j["error"] = "failed to delete " + target;
+          }
+          else{
+            j["success"] = "deleted " + target;
+          }
+
+          return crow::response{j}; });
+
+  CROW_ROUTE(app, "/filesize")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
+     
+          crow::json::wvalue j;
+          std::string target = x["target"].s();
+          Filesystem fileSystem;
+
+          std::string size = fileSystem.getFileSizeHuman(target);
+          j["file size"] = target + ": " + size;
+          
+          return crow::response{j}; });
+
+  CROW_ROUTE(app, "/filewtime")
+      .methods("POST"_method)([](const crow::request &req)
+                              {
+          auto x = crow::json::load(req.body);
+          if (!x || !x.has("target")){
+              return crow::response(400);
+          }
+     
+          crow::json::wvalue j;
+          std::string target = x["target"].s();
+          Filesystem fileSystem;
+
+          std::string size = fileSystem.getLastWriteTime(target);
+          j["file last write time"] = target + ": " + size;
+          
           return crow::response{j}; });
 
   CROW_ROUTE(app, "/static")

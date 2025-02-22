@@ -10,6 +10,7 @@
  */
 
 #include "rz_filesystem.h"
+#include "rz_string_lib.hpp"
 
 /**
  * @brief Filesystem::Filesystem
@@ -398,6 +399,22 @@ void Filesystem::showFileSizeHuman(const std::filesystem::path &file) noexcept
     }
 }
 
+std::string Filesystem::getFileSizeHuman(const std::filesystem::path &file) noexcept
+{
+
+    try
+    {
+        auto ret = HumanReadable{std::filesystem::file_size(file)};
+        std::string val = std::to_string(ret.size);
+        return val;
+    }
+    catch (std::filesystem::filesystem_error &e)
+    {
+        return e.what();
+    }
+    return "";
+}
+
 /**
  * @brief Filesystem::getFileSize
  *
@@ -514,6 +531,34 @@ void Filesystem::printDiskSpaceInfo(std::string const &dir, int width)
     for (auto x : {si.capacity / kB, si.free / kB, si.available / kB, diskUsagePercent(si)})
         std::cout << "│ " << std::setw(width) << static_cast<std::intmax_t>(x) << ' ';
     std::cout << "│ " << dir << '\n';
+}
+
+std::unordered_map<std::string, std::string> Filesystem::getVisibleMounts()
+{
+    std::unordered_map<std::string, std::string> mounts;
+
+    std::ifstream inputFile("/proc/self/mounts");
+
+    if (!inputFile)
+    {
+        mounts["error"] = "Failed to open /proc/self/mounts";
+        inputFile.close();
+        return mounts;
+    }
+
+    std::string line;
+    while (std::getline(inputFile, line))
+    {
+        std::cout << line << std::endl;
+
+        // std::string token = line.substr(0, s.find(","));
+        std::vector<std::string> token = rz_string_lib::split(line, ' ');
+        std::string rights = token[3].substr(0, 2);
+        mounts[token[0]] = token[1] + " " + token[2] + " " + rights;
+    }
+
+    inputFile.close();
+    return mounts;
 }
 
 void Filesystem::setFileStructure(std::string &pathToFile)

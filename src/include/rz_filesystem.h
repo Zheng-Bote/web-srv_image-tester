@@ -14,6 +14,9 @@
 #include <filesystem>
 #include <format>
 #include <print>
+#include <fstream>
+#include <string>
+#include <vector>
 #include <iostream>
 #include <chrono>
 #include <cmath>
@@ -100,6 +103,8 @@ public:
 
   void showFileSizeHuman(const std::filesystem::path &file) noexcept;
 
+  std::string getFileSizeHuman(const std::filesystem::path &file) noexcept;
+
   std::string getFilePermission(const std::filesystem::path &file);
   std::string getLastWriteTime(const std::filesystem::path &file);
   std::uintmax_t getFileSize(const std::filesystem::path &file);
@@ -117,4 +122,6 @@ public:
   diskUsagePercent(const std::filesystem::space_info &si,
                    bool is_privileged = false) noexcept;
   void printDiskSpaceInfo(std::string const &dir, int width = 14);
+
+  std::unordered_map<std::string, std::string> getVisibleMounts();
 };
