@@ -9,6 +9,15 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Dockerfile](#dockerfile)
+  - [File structure](#file-structure)
+  - [Dockerfile](#dockerfile-1)
+  - [start_app.sh](#start_appsh)
+  - [create Docker image](#create-docker-image)
+  - [create/run Docker container](#createrun-docker-container)
+  - [run/check Docker container](#runcheck-docker-container)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
