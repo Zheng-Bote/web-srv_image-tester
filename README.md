@@ -14,10 +14,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-    - [Features](#features)
+  - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
     - [README / Documentation](#readme--documentation)
@@ -77,8 +78,9 @@ C++23 Crow webserver to check the content of a Docker image.
 <br>
 
 - \[x] some more or less usefull Github Actions for GH-repo, GH-pages, GH-wiki, CI/CD-Pipelines
+- \[ ] Packagemanager
 - \[x] Packagemanager (CMake)
-- \[x] Installation routine (AppImage)
+- \[x] Installation routine (AppImage, deb)
 - \[ ] portable application
 - \[x] supports SSL (https)
 
@@ -138,11 +140,11 @@ create ToC in Markdown files in folders
 
 ![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/02_en.png)
 
-### get directory size in Bytes
+### failed command / example error message
 
 ![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/03_en.png)
 
-### create (nested) directories
+### get directory size
 
 ![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/04_en.png)
 
@@ -157,6 +159,10 @@ create ToC in Markdown files in folders
 ### list program (inifile) configuration
 
 ![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/07_en.png)
+
+### list visible mounts with permissions
+
+![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/08_en.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -198,6 +204,28 @@ write_dir = /tmp                                  # Path to the directory to wri
 upload_dir = /tmp/crow_web/uploads                # Path to the directory where uploaded files are stored
 ```
 
+## known errors
+
+In some cases (e.g. with Alpine image) the execution of crow_web-x86_64.AppImage fails
+
+> \[!TIP]
+> install fuse
+
+```bash
+# on Ubuntu (>= 22.04):
+sudo apt install libfuse2
+```
+
+or
+
+> \[!TIP]
+> extract AppImage and execute binary
+
+```bash
+./crow_web-x86_64.AppImage --appimage-extract
+squashfs-root/usr/bin/crow_web static/crow_web.ini
+```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 # Installation
@@ -210,7 +238,10 @@ No installation needed, the AppImage includes all dependencies. Just start in a 
 
 ### Debian package (deb)
 
-**_still under construction_**
+```bash
+chmod 550 crow_web-x86_64.deb
+dpkg -i crow_web-x86_64.deb
+```
 
 ## from Source / Developement
 
@@ -218,6 +249,9 @@ Compiled with Ubuntu clang version 18.1.3 (1ubuntu1), Target: x86_64-pc-linux-gn
 
 > \[!NOTE]
 > should work with any compiler with C++23 support
+
+> \[!TIP]
+> see also Githubpage for Doxygen documentation
 
 ### using SSL and compression
 
@@ -272,6 +306,7 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
+
 ```
 .
 ├── .github
@@ -636,6 +671,7 @@ https://www.openssl.org/
 
 15 directories, 345 files
 ```
+
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>

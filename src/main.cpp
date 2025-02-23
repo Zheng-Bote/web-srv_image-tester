@@ -1,6 +1,16 @@
 /* clang++ -std=c++23 main.cpp -lpthread -o main */
 /* https://github.com/CrowCpp */
 
+/**
+ * @file main.cpp
+ * @author ZHENG Robert (robert.hase-zheng.net)
+ * @brief CXX23 webserver to check docker image content
+ * @version 0.4.0
+ * @date 2025-02-15
+ *
+ * @copyright Copyright (c) 2025 ZHENG Robert
+ */
+
 #include <crow.h>
 #include <iostream>
 #include <print>
@@ -22,7 +32,6 @@ auto sptr_snippets = std::make_shared<Snippets>();
 
 int main(int argc, char *argv[])
 {
-  bool oknok{false};
   std::string msg{""};
 
   if (argc < 2)
@@ -37,8 +46,6 @@ int main(int argc, char *argv[])
   }
   sptr_snippets->checkFunctionReturn(sptr_ini_config->loadIni(msg), Snippets::Status::FATAL);
 
-  // sptr_ini_config->listIniEntries();
-
   crow::SimpleApp app;
 
   std::string prog_ssl{"OFF"};
@@ -47,8 +54,6 @@ int main(int argc, char *argv[])
   {
     prog_ssl = "ON";
     app.ssl_file(sptr_ini_config->getSslCert(), sptr_ini_config->getSslKey());
-    // app.ssl_file("/path/to/cert.crt", "/path/to/keyfile.key");
-    //  app.ssl_file("/path/to/pem_file.pem");
   }
   else
   {
@@ -58,7 +63,7 @@ int main(int argc, char *argv[])
   prog_ssl = "OFF";
 #endif
   sptr_snippets->setSslStatus(prog_ssl);
-  std::println("Webserver SSL is: {}", prog_ssl);
+  // std::println("Webserver SSL is: {}", prog_ssl);
 
   /* ##### Routing ##### */
 
@@ -141,9 +146,13 @@ int main(int argc, char *argv[])
           Filesystem fileSystem;
           crow::json::wvalue j;
           std::string path = x["target"].s();
-          int size = fileSystem.calculateDirectorySize(path);
-          j["directory size"] = path + ": " + std::to_string(size);
-          
+          std::unordered_map<std::string, std::string> uMap;
+          uMap = fileSystem.getCalculateDirectorySize(path);
+          for (const auto &n : uMap)
+          {
+            j[n.first] = n.second;
+          }
+
           return crow::response{j}; });
 
   CROW_ROUTE(app, "/crdirs")
@@ -179,12 +188,10 @@ int main(int argc, char *argv[])
           Filesystem fileSystem;
           crow::json::wvalue j;
           std::string path = x["target"].s();
-          if (!fileSystem.removeDirectories(path))
+
+          for (const auto &n : fileSystem.doRemoveDirectories(path))
           {
-            j["error"] = "failed deleting " + path;
-          }
-          else{
-            j["success"] = "deleted " + path;
+            j[n.first] = n.second;
           }
 
           return crow::response{j}; });
@@ -225,13 +232,29 @@ int main(int argc, char *argv[])
          
           crow::json::wvalue j;
           std::string target = x["target"].s();
-          if (!std::filesystem::remove(target))
+
+          try
           {
-            j["error"] = "failed to delete " + target;
+            if (!std::filesystem::remove(target))
+            {
+              if(!std::filesystem::exists(target)){
+                j["error"] = "file doesn't exist" + target;
+              }
+              else{
+                j["error"] = "failed to delete " + target;
+              }
+            }
+            else
+            {
+              j["success"] = "deleted " + target;
+            }
           }
-          else{
-            j["success"] = "deleted " + target;
+          catch(const std::exception& e)
+          {
+            std::cerr << e.what() << '\n';
+            j["error"] = e.what();
           }
+          
 
           return crow::response{j}; });
 
@@ -247,8 +270,10 @@ int main(int argc, char *argv[])
           std::string target = x["target"].s();
           Filesystem fileSystem;
 
-          std::string size = fileSystem.getFileSizeHuman(target);
-          j["file size"] = target + ": " + size;
+          for (const auto &n : fileSystem.getFileSizeHuman(target))
+          {
+            j[n.first] = n.second;
+          }
           
           return crow::response{j}; });
 
@@ -264,9 +289,11 @@ int main(int argc, char *argv[])
           std::string target = x["target"].s();
           Filesystem fileSystem;
 
-          std::string size = fileSystem.getLastWriteTime(target);
-          j["file last write time"] = target + ": " + size;
-          
+          for (const auto &n : fileSystem.getLastWriteTime(target))
+          {
+            j[n.first] = n.second;
+          }
+         
           return crow::response{j}; });
 
   CROW_ROUTE(app, "/static")
@@ -359,6 +386,8 @@ int main(int argc, char *argv[])
           j["success"] = "file uploaded: " + pathToOutfile;
           return crow::response(j); });
 
+  // ##### Start the webserver #####
+
   std::string prog_build_type = PROG_BUILD_TYPE;
   if (prog_build_type.compare("Debug") == 0)
   {
@@ -369,6 +398,7 @@ int main(int argc, char *argv[])
     app.loglevel(crow::LogLevel::Warning);
   }
 
+  std::println("Webserver SSL: {}, URL: {}:{}", prog_ssl, sptr_ini_config->getWebserverUrl(), sptr_ini_config->getWebserverPort());
   // app.port(8080).loglevel(crow::LogLevel::Debug).multithreaded().run();
   app.port(sptr_ini_config->getWebserverPort())
       .multithreaded()

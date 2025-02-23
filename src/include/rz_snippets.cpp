@@ -7,12 +7,22 @@
 
 #include "rz_config.h"
 
+/**
+ * @brief Snippets::Snippets
+ */
 Snippets::Snippets() {}
 
+/**
+ * @brief Snippets::~Snippets
+ */
 Snippets::~Snippets()
 {
 }
 
+/**
+ * @brief Snippets::getAbout
+ * @return std::map<std::string, std::string>
+ */
 std::map<std::string, std::string> Snippets::getAbout()
 {
     std::map<std::string, std::string> aboutMap;
@@ -27,6 +37,10 @@ std::map<std::string, std::string> Snippets::getAbout()
     return aboutMap;
 }
 
+/**
+ * @brief Snippets::setSslStatus
+ * @param sslStatus
+ */
 void Snippets::setSslStatus(std::string &sslStatus)
 {
     prog_ssl = sslStatus;

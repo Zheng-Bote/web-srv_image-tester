@@ -1,7 +1,12 @@
-/* 
-background-color: light-dark(#ffffff, #121212);
---button-bg: light-dark(#007bff, #0056b3);
-*/
+/**
+ * @file main.css
+ * @author ZHENG Robert (robert.hase-zheng.net)
+ * @brief CXX23 webserver to check docker image content
+ * @version 0.2.0
+ * @date 2025-02-15
+ *
+ * @copyright Copyright (c) 2025 ZHENG Robert
+ */
 
 :root {
   /* lightgrey */
@@ -281,6 +286,16 @@ kbd {
   color: var(--back-color);
   border-radius: var(--universal-border-radius);
   padding: calc(var(--universal-padding) / 4) calc(var(--universal-padding) / 2);
+}
+
+.section_msg {
+  background: var(--background-color-light);
+  color: var(--red-color);
+  padding: 5px;
+  border: var(--border-width) var(--border-style) var(--red-color);
+  border-radius: var(--border-radius);
+  margin: 5px;
+  display: none;
 }
 
 /* ##### Media Queries */

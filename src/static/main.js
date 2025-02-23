@@ -1,5 +1,16 @@
+/**
+ * @file main.js
+ * @author ZHENG Robert (robert.hase-zheng.net)
+ * @brief CXX23 webserver to check docker image content
+ * @version 0.2.0
+ * @date 2025-02-15
+ *
+ * @copyright Copyright (c) 2025 ZHENG Robert
+ */
+
 window.onload = start;
 
+// general functions at document start
 function start() {
   document
     .getElementById("header_right")
@@ -11,6 +22,7 @@ function start() {
   });
 }
 
+// general functions
 function gotoGithub() {
   window.open("https://github.com/Zheng-Bote");
 }
@@ -18,38 +30,99 @@ function gotoGithubRepo() {
   window.open("https://github.com/Zheng-Bote/web-srv_image-tester");
 }
 
-function dirLs() {
-  let input = document.getElementById("dir_ls_in").value;
-
-  if (input.length == 0) {
-    alert("Please enter a directory");
-  } else {
-    get_DirLs(input);
-  }
+function showError(err) {
+  let section_msg = document.getElementById("section_msg");
+  section_msg.style.display = "block";
+  section_msg.innerHTML = err;
+  setTimeout(hideError, 15000);
 }
-async function get_DirLs(path) {
-  fetch("/dirls", {
+function hideError() {
+  let section_msg = document.getElementById("section_msg");
+  section_msg.style.display = "none";
+  section_msg.innerHTML = "";
+}
+
+function output(data) {
+  let output = document.getElementById("section_content");
+  output.innerHTML = "";
+  let code = document.createElement("code");
+  let pre = document.createElement("pre");
+
+  for (const key in data) {
+    pre.innerHTML += `${key}: ${data[key]}\n`;
+  }
+
+  code.appendChild(pre);
+  output.appendChild(code);
+}
+
+async function get_Post(url, path) {
+  hideError();
+
+  fetch(`/${url}`, {
     method: "POST",
     body: JSON.stringify({ target: path }),
   })
     .then(async (response) => {
-      // get json response here
       let data = await response.json();
 
       if (response.status === 200) {
         if (data.error) {
           console.error(data.error);
+          showError(data.error);
           output(data);
         } else {
           output(data);
         }
       } else {
         console.error("else status ", data);
+        showError(data);
       }
     })
     .catch((err) => {
       console.error(err);
+      showError(err);
     });
+}
+
+async function get_Get(url) {
+  hideError();
+
+  fetch(`/${url}`, {
+    method: "GET",
+  })
+    .then(async (response) => {
+      let data = await response.json();
+
+      if (response.status === 200) {
+        if (data.error) {
+          console.error(data.error);
+          showError(data.error);
+          output(data);
+        } else {
+          output(data);
+        }
+      } else {
+        console.error("else status ", data);
+        showError(data);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      showError(err);
+    });
+}
+
+// functions for UI buttons
+
+function dirLs() {
+  let input = document.getElementById("dir_ls_in").value;
+
+  if (input.length == 0) {
+    alert("Please enter a directory");
+  } else {
+    get_Post("dirls", input);
+  }
 }
 
 function dirSize() {
@@ -58,32 +131,8 @@ function dirSize() {
   if (input.length == 0) {
     alert("Please enter a directory");
   } else {
-    get_DirSize(input);
+    get_Post("dirsize", input);
   }
-}
-async function get_DirSize(path) {
-  fetch("/dirsize", {
-    method: "POST",
-    body: JSON.stringify({ target: path }),
-  })
-    .then(async (response) => {
-      // get json response here
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 }
 
 function createDirs() {
@@ -92,32 +141,8 @@ function createDirs() {
   if (input.length == 0) {
     alert("Please enter a directory");
   } else {
-    create_Dirs(input);
+    get_Post("crdirs", input);
   }
-}
-async function create_Dirs(path) {
-  fetch("/crdirs", {
-    method: "POST",
-    body: JSON.stringify({ target: path }),
-  })
-    .then(async (response) => {
-      // get json response here
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 }
 
 function rmDirs() {
@@ -126,32 +151,8 @@ function rmDirs() {
   if (input.length == 0) {
     alert("Please enter a directory");
   } else {
-    rm_Dirs(input);
+    get_Post("rmdirs", input);
   }
-}
-async function rm_Dirs(path) {
-  fetch("/rmdirs", {
-    method: "POST",
-    body: JSON.stringify({ target: path }),
-  })
-    .then(async (response) => {
-      // get json response here
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 }
 
 function uploadFile() {
@@ -164,7 +165,6 @@ function uploadFile() {
   }
 }
 async function upload_File() {
-  //let input = document.getElementById("upload_file_in").value;
   var input = document.querySelector('input[type="file"]');
   var data = new FormData();
   data.append("InputFile", input.files[0]);
@@ -175,22 +175,24 @@ async function upload_File() {
     body: data,
   })
     .then(async (response) => {
-      // get json response here
       let data = await response.json();
 
       if (response.status === 200) {
         if (data.error) {
           console.error(data.error);
+          showError(data.error);
           output(data);
         } else {
           output(data);
         }
       } else {
         console.error("else status ", data);
+        showError(data);
       }
     })
     .catch((err) => {
       console.error(err);
+      showError(err);
     });
 }
 
@@ -200,32 +202,8 @@ function fileSize() {
   if (target.length == 0) {
     alert("Please enter a file");
   } else {
-    file_size(target);
+    get_Post("filesize", target);
   }
-}
-async function file_size(target) {
-  fetch("/filesize", {
-    method: "POST",
-    body: JSON.stringify({ target: target }),
-  })
-    .then(async (response) => {
-      // get json response here
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 }
 
 function writeTimeFile() {
@@ -234,32 +212,8 @@ function writeTimeFile() {
   if (target.length == 0) {
     alert("Please enter a file");
   } else {
-    writeTime_File(target);
+    get_Post("filewtime", target);
   }
-}
-async function writeTime_File(target) {
-  fetch("/filewtime", {
-    method: "POST",
-    body: JSON.stringify({ target: target }),
-  })
-    .then(async (response) => {
-      // get json response here
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 }
 
 function cpFile() {
@@ -280,22 +234,24 @@ async function cp_file(source, target) {
     body: JSON.stringify({ target: target, source: source }),
   })
     .then(async (response) => {
-      // get json response here
       let data = await response.json();
 
       if (response.status === 200) {
         if (data.error) {
           console.error(data.error);
+          showError(data.error);
           output(data);
         } else {
           output(data);
         }
       } else {
         console.error("else status ", data);
+        showError(data);
       }
     })
     .catch((err) => {
       console.error(err);
+      showError(err);
     });
 }
 
@@ -305,122 +261,18 @@ function delFile() {
   if (input.length == 0) {
     alert("Please enter a file");
   } else {
-    del_File(input);
+    get_Post("rmfile", input);
   }
-}
-async function del_File(path) {
-  fetch("/rmfile", {
-    method: "POST",
-    body: JSON.stringify({ target: path }),
-  })
-    .then(async (response) => {
-      // get json response here
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 }
 
 function listIni() {
-  list_ini();
-}
-async function list_ini() {
-  fetch("/listini", {
-    method: "GET",
-  })
-    .then(async (response) => {
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  get_Get("listini");
 }
 
 function progInfo() {
-  prog_info();
-}
-async function prog_info() {
-  fetch("/proginfo", {
-    method: "GET",
-  })
-    .then(async (response) => {
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  get_Get("proginfo");
 }
 
 function listVMounts() {
-  listV_Mounts();
-}
-async function listV_Mounts() {
-  fetch("/getvmounts", {
-    method: "GET",
-  })
-    .then(async (response) => {
-      let data = await response.json();
-
-      if (response.status === 200) {
-        if (data.error) {
-          console.error(data.error);
-          output(data);
-        } else {
-          output(data);
-        }
-      } else {
-        console.error("else status ", data);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
-function output(data) {
-  let output = document.getElementById("section_content");
-  output.innerHTML = "";
-  let code = document.createElement("code");
-  let pre = document.createElement("pre");
-
-  for (const key in data) {
-    pre.innerHTML += `${key}: ${data[key]}\n`;
-  }
-
-  code.appendChild(pre);
-  output.appendChild(code);
+  get_Get("getvmounts");
 }

@@ -84,6 +84,7 @@ public:
   bool copyDirectories(const std::filesystem::path &src, const std::filesystem::path &dest) noexcept;
   bool removeDirectory(const std::filesystem::path &p) noexcept;
   bool removeDirectories(const std::filesystem::path &p) noexcept;
+  std::unordered_map<std::string, std::string> doRemoveDirectories(const std::filesystem::path &p) noexcept;
   bool isDirectory(const std::filesystem::path &p);
   bool showDirectoryTree(const std::string &p);
 
@@ -92,6 +93,7 @@ public:
   void listDirectories(const std::filesystem::path &p, unsigned tabs = 0);
 
   std::uintmax_t calculateDirectorySize(const std::filesystem::path &dir);
+  std::unordered_map<std::string, std::string> getCalculateDirectorySize(const std::filesystem::path &dir);
 
   // files
   void setFileStructure(std::string &pathToFile);
@@ -103,10 +105,10 @@ public:
 
   void showFileSizeHuman(const std::filesystem::path &file) noexcept;
 
-  std::string getFileSizeHuman(const std::filesystem::path &file) noexcept;
+  std::unordered_map<std::string, std::string> getFileSizeHuman(const std::filesystem::path &file) noexcept;
 
   std::string getFilePermission(const std::filesystem::path &file);
-  std::string getLastWriteTime(const std::filesystem::path &file);
+  std::unordered_map<std::string, std::string> getLastWriteTime(const std::filesystem::path &file);
   std::uintmax_t getFileSize(const std::filesystem::path &file);
 
   // mixed

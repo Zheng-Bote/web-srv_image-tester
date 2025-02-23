@@ -3,11 +3,12 @@ cmake_minimum_required(VERSION 3.23)
 # -DCMAKE_BUILD_TYPE=Debug
 # cmake -B . -S ../src -DCMAKE_BUILD_TYPE=Debug
 # cmake --build . --parallel 6
+# cmake --build . --target doxygen
 
 
 project(
   crow_web
-  VERSION 0.4.0
+  VERSION 0.5.0
   DESCRIPTION "CXX23 webserver to check docker image content"
   HOMEPAGE_URL "https://github.com/Zheng-Bote/web-srv_image-tester"
   LANGUAGES CXX)

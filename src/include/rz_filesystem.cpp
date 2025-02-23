@@ -148,6 +148,32 @@ bool Filesystem::removeDirectories(const std::filesystem::path &p) noexcept
 }
 
 /**
+ * @brief Filesystem::doRemoveDirectories
+ * @param path
+ * @return std::unordered_map<std::string, std::string>
+ */
+std::unordered_map<std::string, std::string> Filesystem::doRemoveDirectories(const std::filesystem::path &p) noexcept
+{
+    std::unordered_map<std::string, std::string> uMap;
+
+    std::filesystem::path dir = p;
+
+    try
+    {
+        const auto cnt = std::filesystem::remove_all(dir);
+        std::cout << std::format("removed {} items\n", cnt);
+        uMap["removed items"] = std::to_string(cnt);
+    }
+    catch (const std::exception &ex)
+    {
+        std::cout << ex.what() << '\n';
+        uMap["error"] = ex.what();
+    }
+
+    return uMap;
+}
+
+/**
  * @brief Filesystem::isDirectory
  * @param p
  * @return bool
@@ -175,6 +201,11 @@ void Filesystem::listDirectory(const std::filesystem::path &p)
         std::cout << entry.path() << '\n';
 }
 
+/**
+ * @brief Filesystem::getListDirectory
+ * @param path
+ * @return std::unordered_map<std::string, std::string>
+ */
 std::unordered_map<std::string, std::string> Filesystem::getListDirectory(const std::filesystem::path &p)
 {
     std::filesystem::path dir = p;
@@ -266,8 +297,38 @@ std::uintmax_t Filesystem::calculateDirectorySize(const std::filesystem::path &d
 }
 
 /**
+ * @brief Filesystem::getCalculateDirectorySize
+ * @param dir
+ * @return std::unordered_map<std::string, std::string>
+ */
+std::unordered_map<std::string, std::string> Filesystem::getCalculateDirectorySize(const std::filesystem::path &dir)
+{
+    std::unordered_map<std::string, std::string> uMap;
+    std::uintmax_t size = 0;
+    try
+    {
+        for (const auto &entry : std::filesystem::recursive_directory_iterator(dir))
+        {
+            if (std::filesystem::is_regular_file(entry.path()))
+            {
+                size += std::filesystem::file_size(entry.path());
+            }
+        }
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+        uMap["error"] = e.what();
+        return uMap;
+    }
+
+    uMap["directory size"] = std::to_string(size);
+    return uMap;
+}
+
+/**
  * @brief Filesystem::copyFile
- * @description update_existing
+ * @description copy source file to taget file
  * @param src
  * @param dest
  * @return bool
@@ -292,6 +353,13 @@ bool Filesystem::copyFile(const std::filesystem::path &src,
     return false;
 }
 
+/**
+ * @brief Filesystem::copyFiles
+ * @description update_existing | skip_symlinks
+ * @param src
+ * @param dest
+ * @return bool
+ */
 bool Filesystem::copyFiles(const std::filesystem::path &src,
                            const std::filesystem::path &dest) noexcept
 {
@@ -304,7 +372,7 @@ bool Filesystem::copyFiles(const std::filesystem::path &src,
 
 /**
  * @brief Filesystem::copyFilesRecursive
- * @description update_existing | recursive | skip_symlinks
+ * @description copy files | recursive | skip_symlinks
  * @param src
  * @param dest
  * @return bool
@@ -375,11 +443,21 @@ std::string Filesystem::getFilePermission(const std::filesystem::path &file)
  * @param file
  * @return std::string (UTC, eg 2024-10-09T07:41+0000)
  */
-std::string Filesystem::getLastWriteTime(const std::filesystem::path &file)
+std::unordered_map<std::string, std::string> Filesystem::getLastWriteTime(const std::filesystem::path &file)
 {
     // std::setlocale(LC_TIME, "de_DE.UTF-8");
-    auto ftime = std::filesystem::last_write_time(file);
-    return std::format("{0:%F}T{0:%R%z}", ftime);
+    std::unordered_map<std::string, std::string> uMap;
+    try
+    {
+        auto ftime = std::filesystem::last_write_time(file);
+        uMap["file last write time"] = std::format("{0:%F}T{0:%R%z}", ftime);
+        return uMap;
+    }
+    catch (std::filesystem::filesystem_error &e)
+    {
+        uMap["error"] = e.what();
+        return uMap;
+    }
 }
 
 /**
@@ -399,20 +477,27 @@ void Filesystem::showFileSizeHuman(const std::filesystem::path &file) noexcept
     }
 }
 
-std::string Filesystem::getFileSizeHuman(const std::filesystem::path &file) noexcept
+/**
+ * @brief Filesystem::getFileSizeHuman
+ *
+ * @param file
+ * @return std::unordered_map<std::string, std::string>
+ */
+std::unordered_map<std::string, std::string> Filesystem::getFileSizeHuman(const std::filesystem::path &file) noexcept
 {
-
+    std::unordered_map<std::string, std::string> uMap;
     try
     {
         auto ret = HumanReadable{std::filesystem::file_size(file)};
         std::string val = std::to_string(ret.size);
-        return val;
+        uMap["file size"] = val;
+        return uMap;
     }
     catch (std::filesystem::filesystem_error &e)
     {
-        return e.what();
+        uMap["error"] = e.what();
+        return uMap;
     }
-    return "";
 }
 
 /**
@@ -533,6 +618,11 @@ void Filesystem::printDiskSpaceInfo(std::string const &dir, int width)
     std::cout << "│ " << dir << '\n';
 }
 
+/**
+ * @brief Filesystem::getVisibleMounts
+ *
+ * @return std::unordered_map<std::string, std::string>
+ */
 std::unordered_map<std::string, std::string> Filesystem::getVisibleMounts()
 {
     std::unordered_map<std::string, std::string> mounts;
@@ -561,6 +651,11 @@ std::unordered_map<std::string, std::string> Filesystem::getVisibleMounts()
     return mounts;
 }
 
+/**
+ * @brief Filesystem::setFileStructure
+ *
+ * @param pathToFile
+ */
 void Filesystem::setFileStructure(std::string &pathToFile)
 {
     namespace fs = std::filesystem;

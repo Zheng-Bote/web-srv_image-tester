@@ -15,41 +15,71 @@
 
 #include "rz_inifile.hpp"
 
+/**
+ * @brief Inifile::Inifile
+ */
 Inifile::Inifile()
 {
 }
 
+/**
+ * @brief Inifile::Inifile
+ * @param progname
+ */
 Inifile::Inifile(std::string &progname)
 {
     std::string file = progname + ".ini";
     Inifile::loadIni(file);
 }
 
+/**
+ * @brief Inifile::Inifile
+ * @param path
+ * @param progname
+ */
 Inifile::Inifile(std::string &path, std::string &progname)
 {
     std::string pathToFile = path + "/" + progname + ".ini";
     Inifile::loadIni(pathToFile);
 }
 
+/**
+ * @brief Inifile::~Inifile
+ */
 Inifile::~Inifile()
 {
 }
 
+/**
+ * @brief Inifile::setIniFileName
+ * @param progname
+ */
 void Inifile::setIniFileName(std::string &progname)
 {
     Inifile::pathToInifile = progname + ".ini";
 }
 
+/**
+ * @brief Inifile::setIniFile
+ * @param pathToInifile
+ */
 void Inifile::setIniFile(std::string &pathToInifile)
 {
     Inifile::pathToInifile = pathToInifile;
 }
 
+/**
+ * @brief Inifile::getInifile
+ * @return std::string
+ */
 std::string Inifile::getInifile()
 {
     return Inifile::pathToInifile;
 }
 
+/**
+ * @brief Inifile::createIni
+ */
 void Inifile::createIni()
 {
     myIni["Webserver"]["url"] = "http://localhost";
@@ -71,6 +101,11 @@ void Inifile::createIni()
     */
 }
 
+/**
+ * @brief Inifile::saveIniToFile
+ * @param pathToFile
+ * @return std::tuple<bool, std::string>
+ */
 std::tuple<bool, std::string> Inifile::saveIniToFile(std::string &pathToFile)
 {
     try
@@ -86,6 +121,11 @@ std::tuple<bool, std::string> Inifile::saveIniToFile(std::string &pathToFile)
     return std::make_tuple(true, "Write Ini successfull: " + pathToFile);
 }
 
+/**
+ * @brief Inifile::loadIni
+ * @param pathToFile
+ * @return std::tuple<bool, std::string>
+ */
 std::tuple<bool, std::string> Inifile::loadIni(std::string &pathToFile)
 {
     if (std::filesystem::exists(pathToFile) == 0)
@@ -108,46 +148,82 @@ std::tuple<bool, std::string> Inifile::loadIni(std::string &pathToFile)
     return std::make_tuple(true, "Inifile loaded: " + pathToFile);
 }
 
+/**
+ * @brief Inifile::getWebserverUrl
+ * @return std::string
+ */
 std::string Inifile::getWebserverUrl()
 {
     return myIni["Webserver"]["url"].as<std::string>();
 }
 
+/**
+ * @brief Inifile::getWebserverPort
+ * @return unsigned int
+ */
 unsigned int Inifile::getWebserverPort()
 {
     return myIni["Webserver"]["port"].as<unsigned int>();
 }
 
+/**
+ * @brief Inifile::getSslCert
+ * @return std::string
+ */
 std::string Inifile::getSslCert()
 {
     return myIni["Webserver"]["ssl_certfile"].as<std::string>();
 }
 
+/**
+ * @brief Inifile::getSslKey
+ * @return std::string
+ */
 std::string Inifile::getSslKey()
 {
     return myIni["Webserver"]["ssl_keyfile"].as<std::string>();
 }
 
+/**
+ * @brief Inifile::getSslPem
+ * @return std::string
+ */
 std::string Inifile::getSslPem()
 {
     return myIni["Webserver"]["ssl_pemfile"].as<std::string>();
 }
 
+/**
+ * @brief Inifile::getUseSsl
+ * @return bool
+ */
 bool Inifile::getUseSsl()
 {
     return myIni["Webserver"]["use_ssl"].as<bool>();
 }
 
+/**
+ * @brief Inifile::getSystemWriteDir
+ * @return std::string
+ */
 std::string Inifile::getSystemWriteDir()
 {
     return myIni["Webserver"]["write_dir"].as<std::string>();
 }
 
+/**
+ * @brief Inifile::getUploadPath
+ * @return std::string
+ */
 std::string Inifile::getUploadPath()
 {
     return myIni["Webserver"]["upload_dir"].as<std::string>();
 }
 
+/**
+ * @brief Inifile::listIniEntries()
+ * @return void
+ */
 void Inifile::listIniEntries()
 {
     std::println("Parsed ini contents");
@@ -174,6 +250,10 @@ void Inifile::listIniEntries()
     }
 }
 
+/**
+ * @brief Inifile::getIniEntries
+ * @return std::map<std::string, std::string>
+ */
 std::map<std::string, std::string> Inifile::getIniEntries()
 {
     std::map<std::string, std::string> iniMap;
