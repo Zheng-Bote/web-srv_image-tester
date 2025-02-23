@@ -14,11 +14,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [Description](#description)
-  - [Features](#features)
+    - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
     - [README / Documentation](#readme--documentation)
@@ -27,15 +26,17 @@
   - [Screenshots](#screenshots)
     - [Startpage](#startpage)
     - [list directory content with permissions](#list-directory-content-with-permissions)
-    - [get directory size in Bytes](#get-directory-size-in-bytes)
-    - [create (nested) directories](#create-nested-directories)
+    - [failed command / example error message](#failed-command--example-error-message)
+    - [get directory size](#get-directory-size)
     - [upload a file](#upload-a-file)
     - [crow_web program info](#crow_web-program-info)
     - [list program (inifile) configuration](#list-program-inifile-configuration)
+    - [list visible mounts with permissions](#list-visible-mounts-with-permissions)
 - [Usage](#usage)
   - [without parameter](#without-parameter)
   - [Parameters](#parameters)
   - [Inifile](#inifile)
+  - [known errors](#known-errors)
 - [Installation](#installation)
   - [Linux](#linux)
     - [AppImage](#appimage)
