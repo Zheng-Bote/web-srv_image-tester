@@ -1,0 +1,23 @@
+<map id="include/rz_filesystem.h" name="include/rz_filesystem.h">
+<area shape="rect" id="Node000001" title="CXX20 filesystem library." alt="" coords="371,5,543,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,96,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="387,33,110,81,109,76,387,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="120,79,187,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="407,33,201,81,200,76,406,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="211,79,263,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="423,33,277,80,276,75,421,28"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="287,79,361,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="437,33,359,74,357,70,435,28"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="385,79,444,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="453,32,431,68,426,66,448,30"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="469,79,531,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="467,30,488,66,484,68,462,32"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="556,79,636,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="481,28,562,70,560,75,478,33"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="660,79,727,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="496,28,647,73,646,79,494,33"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="751,79,814,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="516,28,738,76,737,81,515,33"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="838,79,962,104"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="529,28,825,75,824,81,528,33"/>
+</map>

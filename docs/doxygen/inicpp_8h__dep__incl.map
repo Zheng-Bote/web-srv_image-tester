@@ -1,0 +1,9 @@
+<map id="include/inicpp.h" name="include/inicpp.h">
+<area shape="rect" id="Node000001" title="A header&#45;only and easy to use Ini file parser for C++." alt="" coords="91,5,215,31"/>
+<area shape="rect" id="Node000002" href="$rz__inifile_8hpp_source.html" title=" " alt="" coords="75,79,231,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,44,156,79,151,79,151,44"/>
+<area shape="rect" id="Node000003" href="$rz__inifile_8cpp.html" title="classlib for inicpp.h" alt="" coords="5,152,160,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,116,96,154,92,150,130,112"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title="CXX23 webserver to check docker image content." alt="" coords="184,152,267,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="177,112,216,150,212,154,173,116"/>
+</map>

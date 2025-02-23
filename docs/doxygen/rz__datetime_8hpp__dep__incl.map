@@ -1,0 +1,12 @@
+<map id="include/rz_datetime.hpp" name="include/rz_datetime.hpp">
+<area shape="rect" id="Node000001" title="CXX20 datetime lib." alt="" coords="197,5,376,31"/>
+<area shape="rect" id="Node000002" href="$rz__datetime_8cpp.html" title="CXX20 datetime lib." alt="" coords="5,79,184,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,38,127,81,125,76,242,33"/>
+<area shape="rect" id="Node000003" href="$rz__inifile_8hpp_source.html" title=" " alt="" coords="209,79,365,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="289,44,289,79,284,79,284,44"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="CXX23 webserver to check docker image content." alt="" coords="361,152,444,177"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="327,35,355,53,379,77,390,96,398,116,404,151,399,152,392,118,385,98,375,80,352,57,324,39"/>
+<area shape="rect" id="Node000004" href="$rz__inifile_8cpp.html" title="classlib for inicpp.h" alt="" coords="183,152,337,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="280,118,267,153,262,151,275,116"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="318,109,385,149,382,154,315,113"/>
+</map>
