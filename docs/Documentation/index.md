@@ -1,14 +1,11 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [](#)
-  - [Categories](#categories)
-  - [Documents](#documents)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # 
+HowTos about the installation and configuration
+
+> This area includes HowTos for:
+
+- web-srv_image-tester UI descriptions and screenshots (Main)
+- setup and run a Docker image with web-srv_image-tester (Example)
+- Doxygen documentation (doxygen)
 
 
 ## Categories
