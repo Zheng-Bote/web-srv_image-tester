@@ -14,10 +14,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-    - [Features](#features)
+  - [Features](#features)
   - [Status](#status)
     - [Application / Tool](#application--tool)
     - [README / Documentation](#readme--documentation)
@@ -79,12 +80,12 @@ C++23 Crow webserver to check the content of a Docker image.
 
 <br>
 
-- \[x] some more or less usefull Github Actions for GH-repo, GH-pages, GH-wiki, CI/CD-Pipelines
-- \[ ] Packagemanager
-- \[x] Packagemanager (CMake)
-- \[x] Installation routine (AppImage, deb)
-- \[ ] portable application
-- \[x] supports SSL (https)
+- [x] some more or less usefull Github Actions for GH-repo, GH-pages, GH-wiki, CI/CD-Pipelines
+- [ ] Buildmanager
+- [x] Packagemanager (CMake)
+- [x] Installation routine (AppImage, deb)
+- [ ] portable application
+- [x] supports SSL (https, optional)
 
 <br>
 
@@ -132,6 +133,23 @@ create ToC in Markdown files in folders
 
 # Documentation
 
+## commands
+
+| type     | name                      | description                                                   | needed permissions  |
+| -------- | ------------------------- | ------------------------------------------------------------- | ------------------- |
+| system   | program info              | list program version, SSL on or off, build type, etc          | -                   |
+| system   | list configuration        | shows the loaded inifile                                      | Read-Access needed  |
+| system   | list visible Mounts       | lists only to the current user visible mounts                 | -                   |
+| commands | list directory content    | list directory content with permissions (eg. rwxr-xr-x)       | Read-Access needed  |
+| commands | get directory size        | get the total size (Bytes) of the given directory             | Read-Access needed  |
+| commands | create nested directories | creates one or more nested directories                        | Write-Access needed |
+| commands | delete nested directories | deletes the given directory (and nested ones)                 | Write-Access needed |
+| commands | upload a file             | uploads a file to the (inifile) configured upload folder      | Write-Access needed |
+| commands | get file size             | gets the size (Bytes) of the given file                       | Read-Access needed  |
+| commands | get file last write time  | gets the last write time / modifcation time of the given file | Read-Access needed  |
+| commands | copy file                 | copies the given source file to target                        | Write-Access needed |
+| commands | delete file               | deletes the given file                                        | Write-Access needed |
+
 ## Doxygen
 
 see https://zheng-bote.github.io/web-srv_image-tester/Documentation/ => doxygen
@@ -171,6 +189,9 @@ see https://zheng-bote.github.io/web-srv_image-tester/Documentation/ => doxygen
 ### list visible mounts with permissions
 
 ![App Screenshot](https://github.com/Zheng-Bote/web-srv_image-tester/blob/main/docs/img/08_en.png)
+
+> \[!NOTE]
+> see also <a href="#commands" alt="comamands">list of all commands</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -277,14 +298,14 @@ set(CROW_ENABLE_COMPRESSION ON)
 
 #### CMake
 
-CMake: A Powerful Software Build System
+CMake (>= v3.23): A Powerful Software Build System
 
 [![CMake](https://img.shields.io/badge/CMake-v3.23+-064F8C?logo=cmake)](https://github.com/conan-io/conan)
 [![BSD-3 License](https://img.shields.io/badge/License-BSD_3-green.svg)](https://choosealicense.com/licenses/bsd-3-clause/)
 
 #### Crow
 
-Crow is a C++ framework for creating HTTP or Websocket web services. A Fast and Easy to use microframework for the web.
+Crow (>= v1.2.1.2) is a C++ framework for creating HTTP or Websocket web services. A Fast and Easy to use microframework for the web.
 
 https://crowcpp.org/master/
 
@@ -314,6 +335,7 @@ https://www.openssl.org/
 ### folder structure
 
 <!-- readme-tree start -->
+
 ```
 .
 ├── .github
@@ -391,6 +413,7 @@ https://www.openssl.org/
 
 14 directories, 59 files
 ```
+
 <!-- readme-tree end -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
