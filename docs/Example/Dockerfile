@@ -10,7 +10,7 @@ COPY ./crow_web-x86_64.AppImage /home/webapp
 COPY ./static /home/webapp/static
 COPY ./start_app.sh /home/webapp
 
-# only for SSL
+# only for local SSL testing
 # RUN apt-get update && apt-get upgrade -y && apt-get install apt-utils libssl-dev openssl -y
 # RUN openssl req -x509 -newkey rsa:2048 \
 #  -subj "/C=DE/CN=paas platform instance" \
